@@ -47,51 +47,24 @@
          <div class="bg-circle-3 bg-circle"></div>
          <div class="bg-circle-4 bg-circle"></div>
       </header>
+      <!-- Modal -->
+ <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+  Launch demo modal
+</button>
+
 <!-- Modal -->
-<div class="modal fade" id="play-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Play</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-  <div class="form-group">
-    <label for="exampleInputEmail1">Bet</label>
-    <input type="numeric" class="form-control" id="play-bet" aria-describedby="Bet Amount" placeholder="0">
-  </div>
-  <div class="form-group">
-    <label for="exampleInputPassword1">Strategy</label>
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-secondary active">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked> 15
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option2" autocomplete="off"> 16
-  </label>
-  <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> 17
-  </label>
-          <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> 18
-  </label>
-          <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> 19
-  </label>
-          <label class="btn btn-secondary">
-    <input type="radio" name="options" id="option3" autocomplete="off"> 20
-  </label>
-</div>
-  </div>
-  <div class="form-check">
-    <input type="checkbox" class="form-check-input" id="exampleCheck1">
-    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        ...
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -226,101 +199,101 @@
       <section id="rules">
          <h2 class="text-center text-secondary">Game Rules</h2>
          <div class="d-flex p-2 justify-content-around">
-         <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                <div class="card-header">Simplfied Black Jack Rules</div>
                <div class="card-body">
                   <p class="card-text">   
-                    Aces = 11 points<br>
-                    No split<br>
-                    No double<br>
-                    If draw: bank wins<br>
-                    Bank and players stop drawing cars at 17<br>
+                     Aces = 11 points<br>
+                     No split<br>
+                     No double<br>
+                     If draw: bank wins<br>
+                     Bank and players stop drawing cars at 17<br>
                   </p>
                </div>
-            </div>    
+            </div>
             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                <div class="card-header">Taking Bank Ownership</div>
                <div class="card-body">
                   <p class="card-text">   
-                   If a player make bank go bankrupt he takes bank ownership<br><br>
-                   He will receive the previous bank money in his walett<br><br>
-                   His current bet becomes the bank amount<br>
+                     If a player make bank go bankrupt he takes bank ownership<br><br>
+                     He will receive the previous bank money in his walett<br><br>
+                     His current bet becomes the bank amount<br>
                   </p>
-              </div>
-            </div>    
-             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+               </div>
+            </div>
+            <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                <div class="card-header">Having Bank Ownership</div>
                <div class="card-body">
                   <p class="card-text">   
-                   Because bank has Higher chance of winning, having bank ownership can be very rewarding<br><br>
-                   If bank win: <br>
-                      - 1/5 of bet is send to the bank's owner wallet<br>
-                      - 1/5 of bet is send to the jackpot<br>
-                      - 3/5 is add to the bank's money<br>
+                     Because bank has Higher chance of winning, having bank ownership can be very rewarding<br><br>
+                     If bank win: <br>
+                     - 1/5 of bet is send to the bank's owner wallet<br>
+                     - 1/5 of bet is send to the jackpot<br>
+                     - 3/5 is add to the bank's money<br>
                   </p>
-              </div>
+               </div>
             </div>
             <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
                <div class="card-header">Winning Jackpot</div>
                <div class="card-body">
                   <p class="card-text">   
-                   Even if player have lower chances of winning against the bank, they can win the current jackpot<br><br>
-                    If a player make bank go bankrupt he takes bank ownership and inw the jackpot<br>
+                     Even if player have lower chances of winning against the bank, they can win the current jackpot<br><br>
+                     If a player make bank go bankrupt he takes bank ownership and inw the jackpot<br>
                   </p>
-              </div>
+               </div>
             </div>
-       </div>
-      </section>  
-<hr>
-<!-- Examples-->
+         </div>
+      </section>
+      <hr>
+      <!-- Examples-->
       <section id="examples">
          <h2 class="text-center text-primary">Examples</h2>
          <div class="d-flex p-2 justify-content-around">
-         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                <div class="card-header">Example 1</div>
                <div class="card-body">
                   <p class="card-text">   
-<br>OwnerShip: Justin with amout: 20
-<br>John wallet: 100
-<br>John bets 10 and win
-<br>----- Result:
-<br>OwnerShip: Justin with Amount: 10
-<br>John wallet: 110
+                     <br>OwnerShip: Justin with amout: 20
+                     <br>John wallet: 100
+                     <br>John bets 10 and win
+                     <br>----- Result:
+                     <br>OwnerShip: Justin with Amount: 10
+                     <br>John wallet: 110
                   </p>
                </div>
-            </div>    
+            </div>
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                <div class="card-header">Example 2</div>
                <div class="card-body">
                   <p class="card-text">   
-<br>OwnerShip: Justin with amout: 20
-<br>John wallet: 100
-<br>John bets 30 and win
-<br>----- Result:
-<br>OwnerShip: John with Amount: 30
-<br>John wallet: 90 because 100-30 (bet) + 20 (win from the bank)
+                     <br>OwnerShip: Justin with amout: 20
+                     <br>John wallet: 100
+                     <br>John bets 30 and win
+                     <br>----- Result:
+                     <br>OwnerShip: John with Amount: 30
+                     <br>John wallet: 90 because 100-30 (bet) + 20 (win from the bank)
                   </p>
-              </div>
-            </div>    
+               </div>
+            </div>
             <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
                <div class="card-header">Example 3</div>
                <div class="card-body">
                   <p class="card-text">   
-<br>OwnerShip: Justin with amout: 20
-<br>Justin wallet: 0
-<br>Jackpot: 0
-<br>John wallet: 100
-<br>John bets 50 and loose
-<br>----- Result:
-<br>OwnerShip: Justin with Amount: 50 because 20 + 30 (3/5 of the bet)
-<br>Justin wallet: 10 (1/5 of the bet)
-<br>Jackpot: 10 (1/5 of the bet)
-<br>John wallet: 50 
+                     <br>OwnerShip: Justin with amout: 20
+                     <br>Justin wallet: 0
+                     <br>Jackpot: 0
+                     <br>John wallet: 100
+                     <br>John bets 50 and loose
+                     <br>----- Result:
+                     <br>OwnerShip: Justin with Amount: 50 because 20 + 30 (3/5 of the bet)
+                     <br>Justin wallet: 10 (1/5 of the bet)
+                     <br>Jackpot: 10 (1/5 of the bet)
+                     <br>John wallet: 50 
                   </p>
-              </div>
+               </div>
             </div>
-       </div>
-      </section>       
+         </div>
+      </section>
       <!-- Footer-->
       <footer class="py-5 bg-black">
          <div class="container px-5">
