@@ -218,6 +218,55 @@
             </div>
        </div>
       </section>       
+<!-- Examples-->
+      <section id="examples">
+         <h2 class="text-center text-primary">Examples</h2>
+         <div class="d-flex p-2 justify-content-around">
+         <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+               <div class="card-header">Example 1</div>
+               <div class="card-body">
+                  <p class="card-text">   
+<br>OwnerShip: Justin with amout: 20
+<br>John wallet: 100
+<br>John bets 10 and win
+<br>----- Result:
+<br>OwnerShip: Justin with Amount: 10
+<br>John wallet: 110
+                  </p>
+               </div>
+            </div>    
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+               <div class="card-header">Example 2</div>
+               <div class="card-body">
+                  <p class="card-text">   
+<br>OwnerShip: Justin with amout: 20
+<br>John wallet: 100
+<br>John bets 30 and win
+<br>----- Result:
+<br>OwnerShip: John with Amount: 30
+<br>John wallet: 90 because 100-30 (bet) + 20 (win from the bank)
+                  </p>
+              </div>
+            </div>    
+            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+               <div class="card-header">Example 3</div>
+               <div class="card-body">
+                  <p class="card-text">   
+<br>OwnerShip: Justin with amout: 20
+<br>Justin wallet: 0
+<br>Jackpot: 0
+<br>John wallet: 100
+<br>John bets 50 and loose
+<br>----- Result:
+<br>OwnerShip: Justin with Amount: 50 because 20 + 30 (3/5 of the bet)
+<br>Justin wallet: 10 (1/5 of the bet)
+<br>Jackpot: 10 (1/5 of the bet)
+<br>John wallet: 50 
+                  </p>
+              </div>
+            </div>
+       </div>
+      </section>       
       <!-- Footer-->
       <footer class="py-5 bg-black">
          <div class="container px-5">
