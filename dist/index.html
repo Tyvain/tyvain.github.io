@@ -49,20 +49,12 @@
       </header>
 <!-- Play Modal-->
      <div class="modal fade" id="play-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-         <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-               <div class="modal-header">
-                  <h5 class="modal-title">Play</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                  </button>
-               </div>
                <div class="modal-body">                  
                         <label for="exampleInputEmail1">Bet</label>
-                        <input type="numeric" class="form-control" id="play-bet" aria-describedby="Bet Amount" placeholder="0">               
+                        <input type="numeric" class="form-control" id="play-bet" aria-describedby="Bet Amount" placeholder="0" value="1">               
                         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-                            Stop Value
-                           <label class="btn btn-secondary active">
+                            <span>Stop drawing card value</span>
+                           <label class="btn btn-secondary">
                            <input type="radio" name="options" id="option1" autocomplete="off" > 15
                            </label>
                            <label class="btn btn-secondary">
