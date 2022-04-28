@@ -26,7 +26,7 @@ function game5() {
   ]);
   game5Map.forEach((value, key) => {
     	letterExistsInGuess('m') && applyStyleToLetter('m', 'darkred');
-      !letterExistsInGuess('m') && applyStyleToLetter('m', CLASS_LETTER_VALID);
+      !letterExistsInGuess('m') && removeColors('m');
  
     var varLetterIsInSamePositionInGuess = letterIsInSamePositionInGuess(value, key);
 
