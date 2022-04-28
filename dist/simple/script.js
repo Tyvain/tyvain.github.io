@@ -162,9 +162,18 @@ function removeAllColors() {
 }
 
 function nextGame() {
-  gameNumber.innerHTML = getGameNumber() + 1;
+ document.getElementById('s').classList.add('win');
+ document.getElementById('i').classList.add('win');
+ document.getElementById('m').classList.add('win');
+ document.getElementById('p').classList.add('win');
+ document.getElementById('l').classList.add('win');
+ document.getElementById('e').classList.add('win');
+setTimeout(function(){
+     gameNumber.innerHTML = getGameNumber() + 1;
   guess.value = '';
   removeAllColors();
   validatedLetters = new Set();
+}, 1000);
+
 }
 guess.addEventListener('input', inputHandler);
