@@ -34,7 +34,7 @@ function game5() {
     !varLetterIsInSamePositionInGuess && unvalidateLetter(value);
     letterExistsInGuess(value) && !varLetterIsInSamePositionInGuess && missPlacedLetter(value);
     !letterExistsInGuess(value) && removeColors(value);
-ess('m'))
+
     isAllLettersValidated(game5Map) && !letterExistsInGuess('m') && nextGame();
   })
 }
