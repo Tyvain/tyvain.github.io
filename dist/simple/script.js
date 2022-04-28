@@ -18,15 +18,15 @@ var validatedLetters = new Set();
 
 function game5() {
  const game5Map = new Map([
-    [0, 'e'],
-    [1, 'l'],
+    [0, 's'],
+    [1, 'i'],
     [2, 'p'],
-    [4, 'i'],
-    [5, 's']
+    [3, 'l'],
+    [4, 'e']
   ]);
-  simpleMap.forEach((value, key) => {
+  game5Map.forEach((value, key) => {
     	letterExistsInGuess('m') && applyStyleToLetter('m', 'darkred');
-      !letterExistsInGuess('m') && removeColors('m');
+      !letterExistsInGuess('m') && applyStyleToLetter('m', CLASS_LETTER_VALID);
  
     var varLetterIsInSamePositionInGuess = letterIsInSamePositionInGuess(value, key);
 
@@ -34,8 +34,8 @@ function game5() {
     !varLetterIsInSamePositionInGuess && unvalidateLetter(value);
     letterExistsInGuess(value) && !varLetterIsInSamePositionInGuess && missPlacedLetter(value);
     !letterExistsInGuess(value) && removeColors(value);
-
-    isAllLettersValidated(simpleMap) && !letterExistsInGuess('m') && nextGame();
+ess('m'))
+    isAllLettersValidated(game5Map) && !letterExistsInGuess('m') && nextGame();
   })
 }
 
@@ -106,7 +106,7 @@ function game4() {
 
 function isAllLettersValidated(letterMap) {
 var validated = true;
-  simpleMap.forEach((value, key) => {
+  letterMap.forEach((value, key) => {
     if (!validatedLetters.has(value)) validated = false;
   })
   return validated;
