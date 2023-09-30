@@ -1,3 +1,4 @@
+
 :root {
   --backgroundColor: #09203f;
   --colorShadeA: white;
@@ -7,7 +8,83 @@
   --colorShadeE: #537895;
 }
 
+.speech {
+  background-color:#fff;
+  border:solid 2px #000;
+  border-radius:12px;
+  display:inline-block;
+  margin:.5em;
+  padding:.5em 1em;
+  position:relative;
+  z-index: 11 !important;
+  font-weight: bold;
+  font-size: 115%;
+  visibility: hidden;
+}
 
+.speech1 {
+  position: fixed;
+  top: 630px;
+  left: 526px;
+}
+
+.speech2 {
+  position: fixed;
+  top: 290px;
+  left: 590px;
+}
+
+
+.speech3 {
+  position: fixed;
+  top: 480px;
+  left: 635px;
+}
+
+
+.speech4 {
+  position: fixed;
+  top: 400px;
+  left: 420px;
+}
+
+.speech5 {
+  position: fixed;
+  top: 530px;
+  left: 500px;
+}
+
+.speech6 {
+  position: fixed;
+  top: 180px;
+  left: 430px;
+}
+
+.speech:before {
+  border:solid 12px transparent;
+  border-left:solid 12px #000;
+  border-top:solid 12px #000;
+  bottom:-24px;
+  content:"";
+  height:0;
+  left:24px;
+  position:absolute;
+  transform:skew(-15deg);
+  width:0;
+}
+
+.speech:after {
+  border:solid 10px transparent;
+  border-left:solid 10px #fff;
+  border-top:solid 10px #fff;
+  bottom:-19px;
+  content:"";
+  height:0;
+  left:27px;
+  position:absolute;
+  transform:skew(-15deg);
+  width:0;
+}
 
 body {
   font-family: sans-serif;
@@ -24,7 +101,7 @@ html {
   background-color: #537895;
   height: 610px;
   width: 370px;
-  z-index: 999999 !important;
+  z-index: 10 !important;
   position: fixed;
   top: 130px;
   left: 416px;
@@ -379,11 +456,14 @@ h1 {
   font-weight: 100;
 }
 
-h5 {
+#mouse{
   position: fixed;
-  top: 50px;
-  left: 530px;
-  width: 800px;
+  top: 134px;
+  left: 830px;
+}
+
+h5 {
+  
   color: white;
   text-transform: uppercase;
   padding: 1px;
@@ -398,7 +478,7 @@ h5 {
   background-color: #537895;
   height: 610px;
   width: 370px;
-  z-index: 999999 !important;
+  z-index: 99 !important;
   position: fixed;
   top: 130px;
   left: 416px;
@@ -417,7 +497,7 @@ h5 {
   left: 416px;
   height: 610px;
   width: 370px;
-  color: white;
+  color: #FFE81F;
   font-family: "Pathway Gothic One", sans-serif;
   font-size: 300%;
   font-weight: 800;
@@ -425,9 +505,37 @@ h5 {
   line-height: 150%;
   perspective: 400px;
   text-align: justify;
-  z-index: 999999 !important;
-  -webkit-text-stroke: 3px black;
+  z-index: 100 !important;
 }
+
+#mktt{
+  position: fixed;
+  top: 130px;
+  left: 416px;
+  height: 610px;
+  width: 370px;
+  z-index: 999999 !important;
+  color: white;
+  background-color: #09203f;
+  opacity: 0.95;
+  font-size: 105%;
+  visibility: hidden;
+}
+
+#options{
+  position: fixed;
+  top: 130px;
+  left: 416px;
+  height: 610px;
+  width: 370px;
+  z-index: 200 !important;
+  color: white;
+  background-color: #09203f;
+  opacity: 0.95;
+  font-size: 105%;
+  visibility: hidden;
+}
+
 
 .crawl {
   position: relative;
@@ -521,3 +629,207 @@ button.big-button:active::before {
 
   box-shadow: 0 0 0 2px var(--colorShadeB), 0 0.25em 0 0 var(--colorShadeB);
 }
+
+.mouse {
+  background: #4e5559 linear-gradient(transparent 0%, transparent 50%, #fff 50%, #fff 100%);
+  position: relative;
+  width: 52px;
+  height: 88px;
+  border-radius: 100px;
+  background-size: 100% 200%;
+  animation: colorSlide 5s linear infinite, nudgeMouse 5s ease-out infinite;
+}
+.mouse:before, .mouse:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+.mouse:before {
+  width: 46px;
+  height: 82px;
+  background-color: #222a30;
+  border-radius: 100px;
+}
+.mouse:after {
+  background-color: #fff;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  animation: trackBallSlide 5s linear infinite;
+}
+@keyframes colorSlide {
+  0% {
+    background-position: 0% 100%;
+ }
+  20% {
+    background-position: 0% 0%;
+ }
+  21% {
+    background-color: #4e5559;
+ }
+  29.99% {
+    background-color: #fff;
+    background-position: 0% 0%;
+ }
+  30% {
+    background-color: #4e5559;
+    background-position: 0% 100%;
+ }
+  50% {
+    background-position: 0% 0%;
+ }
+  51% {
+    background-color: #4e5559;
+ }
+  59% {
+    background-color: #fff;
+    background-position: 0% 0%;
+ }
+  60% {
+    background-color: #4e5559;
+    background-position: 0% 100%;
+ }
+  80% {
+    background-position: 0% 0%;
+ }
+  81% {
+    background-color: #4e5559;
+ }
+  90%, 100% {
+    background-color: #fff;
+ }
+}
+@keyframes trackBallSlide {
+  0% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+  6% {
+    opacity: 1;
+    transform: scale(0.9) translateY(5px);
+ }
+  14% {
+    opacity: 0;
+    transform: scale(0.4) translateY(40px);
+ }
+  15%, 19% {
+    opacity: 0;
+    transform: scale(0.4) translateY(-20px);
+ }
+  28%, 29.99% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+  30% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+  36% {
+    opacity: 1;
+    transform: scale(0.9) translateY(5px);
+ }
+  44% {
+    opacity: 0;
+    transform: scale(0.4) translateY(40px);
+ }
+  45%, 49% {
+    opacity: 0;
+    transform: scale(0.4) translateY(-20px);
+ }
+  58%, 59.99% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+  60% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+  66% {
+    opacity: 1;
+    transform: scale(0.9) translateY(5px);
+ }
+  74% {
+    opacity: 0;
+    transform: scale(0.4) translateY(40px);
+ }
+  75%, 79% {
+    opacity: 0;
+    transform: scale(0.4) translateY(-20px);
+ }
+  88%, 100% {
+    opacity: 1;
+    transform: scale(1) translateY(-20px);
+ }
+}
+@keyframes nudgeMouse {
+  0% {
+    transform: translateY(0);
+ }
+  20% {
+    transform: translateY(8px);
+ }
+  30% {
+    transform: translateY(0);
+ }
+  50% {
+    transform: translateY(8px);
+ }
+  60% {
+    transform: translateY(0);
+ }
+  80% {
+    transform: translateY(8px);
+ }
+  90% {
+    transform: translateY(0);
+ }
+}
+@keyframes nudgeText {
+  0% {
+    transform: translateY(0);
+ }
+  20% {
+    transform: translateY(2px);
+ }
+  30% {
+    transform: translateY(0);
+ }
+  50% {
+    transform: translateY(2px);
+ }
+  60% {
+    transform: translateY(0);
+ }
+  80% {
+    transform: translateY(2px);
+ }
+  90% {
+    transform: translateY(0);
+ }
+}
+@keyframes colorText {
+  21% {
+    color: #4e5559;
+ }
+  30% {
+    color: #fff;
+ }
+  51% {
+    color: #4e5559;
+ }
+  60% {
+    color: #fff;
+ }
+  81% {
+    color: #4e5559;
+ }
+  90% {
+    color: #fff;
+ }
+}
+
+

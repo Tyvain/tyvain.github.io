@@ -8,13 +8,15 @@
   <meta charset="UTF-8">
   <link rel="stylesheet" href="styles.css" />
   <script src="./index.js" type="module"></script>
-  <title>RaizViz</title>
+  <title>MKTT</title>
 
 </head>
 <body>
 
 <script>
     var introPlaying = false;
+    var mttkShow = false;
+    var optionShow = false;
 
 function launchintro() {
   var button = document.getElementById('introBtn');
@@ -30,37 +32,66 @@ if (introPlaying){
   el.style.animation = 'none';
   el.offsetHeight; /* trigger reflow */
   el.style.animation = null; 
-//var element = document. getElementById("crawl");
- //element.classList.remove("animate"); 
  el.style.visibility =  'initial';
  el2.style.visibility =  'initial';
-console.log("Intro launched!");
 setTimeout(
     function() {
       stopIntro(el,el2)
-    }, 60000);
+    }, 90000);
  }
 
-  
 }
+
+function showMKTT (){
+  var button = document.getElementById('mttkShow');
+  var el = document.getElementById('mktt');
+
+if (mttkShow){
+  button.innerText  = 'What is MKTT';
+  el.style.visibility =  'hidden';
+  mttkShow=false;
+ } else {
+  button.innerText  = 'Hide MKTT';
+  mttkShow=true;
+  el.style.visibility =  'initial';
+ }
+
+}
+
+function showOptions (){
+  var button = document.getElementById('optionsBtn');
+  var el = document.getElementById('options');
+
+if (optionShow){
+  button.innerText  = 'Options';
+  el.style.visibility =  'hidden';
+  optionShow=false;
+ } else {
+  button.innerText  = 'Hide Options';
+  optionShow=true;
+  el.style.visibility =  'initial';
+ }
+
+}
+
 
 function stopIntro(el,el2){
   el.style.visibility =  'hidden';
       el2.style.visibility =  'hidden';
       introPlaying = false;
 }
- 
 
 </script>
   <h1 class="title">South Pacific Carbon Foodprint</H1>
-    <h5>(Scroll Mouse)</h5>
+    
+    <div id="mouse"><div class="mouse"></div><h5>Scroll Mouse</h5></div>
     <div class="buttons">
       <button  onclick="launchintro()" id="introBtn" class="big-button">Play Introduction</button>
         <br/>
-        <button href="https://superdevresources.com" class="big-button">What is MKTT</button>
+        <button onclick="showMKTT()" id="mttkShow" class="big-button">What is MKTT</button>
         <br/>
         <!-- Read the blog post -->
-        <button href="https://superdevresources.com/super-simple-ghost-button-css/" class="big-button" >Options</button>
+        <button onclick="showOptions()" id="optionsBtn" class="big-button" >Options</button>
     </div>
   <div id="text0" class="text0 text map_infobox">
       Sugars and Sugar Confectionery
@@ -90,27 +121,75 @@ function stopIntro(el,el2){
     </div>
 
     <div id="fade" class="fade"></div>
+<div id="mktt">
+  <h3>Goal:</h3>
+  <p>Identify food trade products in the South Pacific countries that have higher ecological impact.</p>
+
+  <h3>Definition:</h3>
+  <p>The MKTT (Million Kilometer Ton Travel) represents the environmental impact associated with transporting one ton of food over a distance of one kilometer.
+     It is a measure of the ecological footprint or carbon emissions generated during the transportation of food products. </p>
+     <p>A lower MKTT value indicates that a food product has a smaller environmental impact in terms of transportation, making it a more eco-friendly choice.</p>
+
+ 
+</div>
+
+<p class="speech speech1">Ahou!</p>
+<p class="speech speech2">Help!</p>
+<p class="speech speech3">Veivuke!</p>
+<p class="speech speech4">Tauturu!</p>
+  <p class="speech speech5">Helpem mi!</p> 
+  <p class="speech speech6">Akewa!</p>
+
+
+<form id="options">
+  <label>Import or Export:</label><br>
+  <input type="radio" id="import" name="importExport" value="import">
+  <label for="import">Import</label><br>
+  <input type="radio" id="export" name="importExport" value="export">
+  <label for="export">Export</label><br>
+  <input type="radio" id="both" name="importExport" value="both" checked>
+  <label for="both">Both</label><br><br>
+
+  <label>Year:</label><br>
+  <input type="checkbox" id="year2018" name="year" value="2018" checked>
+  <label for="year2018">2018</label><br>
+  <input type="checkbox" id="year2019" name="year" value="2019">
+  <label for="year2019">2019</label><br>
+  <input type="checkbox" id="year2020" name="year" value="2020">
+  <label for="year2020">2020</label><br><br>
+
+  <label>Region:</label><br>
+  <input type="checkbox" id="pacific" name="region" value="pacific" checked>
+  <label for="pacific">Pacific</label><br>
+  <input type="checkbox" id="restofworld" name="region" value="restofworld" checked>
+  <label for="restofworld">Rest of the World</label><br><br>
+
+</form>
 
 <section id="star-wars" class="star-wars">
   <div id="crawl" class="crawl">
     <div class="title">
-      <p>Episode II</p>
+      <p>Dataviz - Episode II</p>
       <h2>A New Hope</h2>
     </div>
     <p>
       In the serene South Pacific, where palm trees whispered secrets to the gentle ocean breeze, a paradise known as Haven Atoll faced a challenge. 
-      The islanders, living in harmony with nature, had long relied on imported foods.
-       A visionary named SeaWalker, inspired by the Force of self-sufficiency, rose to lead.
+      The islanders, living in harmony with nature, had long relied on imported foods.</p>
+      <p>
+      A visionary named SeaWalker, inspired by the Force of self-sufficiency, rose to lead.
     </p>
 
     <p> 
-        With the aid of a unique technology created by the South Pacific Community, islanders identified their main imported food sources. 
+        With the aid of a unique technology created by the South Pacific Community, islanders identified their main imported food sources. </p>
+        <p>
         They realized the extent of their dependence and set out to change it.
          Using ancient agricultural wisdom and sustainable fishing practices, they transformed the atoll into a haven of self-reliance.
     </p>
           <p> 
             Years passed, and Haven Atoll thrived. 
             The technology, now shared with neighboring islands, sparked a wave of self-sufficiency across the South Pacific. 
+          </p>
+            <p>
             Haven Atoll had become a symbol of hope, proving that even in paradise, embracing self-reliance could lead to a brighter future for all.
           </p>
     </div>

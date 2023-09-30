@@ -39,21 +39,39 @@ window.addEventListener('wheel', function(event) {
 
   if (Math.abs(totalScrollDelta) >= 200) { // Adjust the threshold as needed
     isScrolling = false;
+    var mouse = document.querySelector('#mouse');
+    console.log("-current: " + currentStep);
+
+    if (totalScrollDelta >= 0 && currentStep == 4) {
+      var bd = document.querySelectorAll('.speech');
+      bd.forEach(el => el.style.visibility = "initial");
+      var txt = document.querySelectorAll('.text');
+      txt.forEach(el => el.style.visibility = "hidden");
+    }
+    
+    if (totalScrollDelta < 0 && currentStep == 4) {
+      var bd = document.querySelectorAll('.speech');
+      bd.forEach(el => el.style.visibility = "hidden");
+      var txt = document.querySelectorAll('.text');
+      txt.forEach(el => el.style.visibility = "initial");
+    }
 
     if (totalScrollDelta >= 0 && currentStep < stepValues.length -1) {
       console.log("O++, display: " + currentStep);
+      if (currentStep === -1) mouse.style.visibility = 'hidden';
       currentStep++;
       display(currentStep)
       displayText(currentStep)
    
     } else if (totalScrollDelta < 0 && currentStep >= 0) {
       console.log("--, hide: " + currentStep);
+      if (currentStep === 0) mouse.style.visibility = 'initial';
       hide(currentStep)
       hideText(currentStep)
       currentStep--;
     }
 
-    console.log("-current: " + currentStep);
+   
    
     //waterContainer.style.height = stepValues[currentStep] + '%';
     
