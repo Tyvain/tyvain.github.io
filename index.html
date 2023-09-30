@@ -9,10 +9,40 @@
   <link rel="stylesheet" href="styles.css" />
   <script src="./index.js" type="module"></script>
   <title>MKTT</title>
-
 </head>
 <body>
+  <dialog id="explanation-dialog">
+    <h2><center>Project Explanation</center></h2>
+  
+    <h2>Data Gathering</h2>
+    <p>I began by collecting data from two primary sources - the Pacific Food and Beverage Trade dataset and the GeoDist Open Data. The Pacific Food and Beverage Trade dataset provided valuable information on food trade within the South Pacific region, including details on product quantities and the countries involved. The GeoDist Open Data, on the other hand, supplied bilateral distances between countries, which were crucial for calculating the MKTT indicator.</p>
 
+    <h2>Data Cleaning and Integration</h2>
+    <p>Merging data from two different sources is a complex task. I had to clean and align the datasets, ensuring that the country codes matched correctly. This process required manual alterations to harmonize the data, making it possible to perform meaningful analyses.</p>
+
+    <h2>Querying and Data Analysis</h2>
+    <p>I worked diligently to identify meaningful and actionable queries from the integrated dataset. This step involved identifying patterns, trends, and insights that could be extracted to calculate the MKTT indicator and assess the ecological impact of food trade in the South Pacific region.</p>
+
+    <h2>Website Development</h2>
+    <p>I chose to develop a website for this project. Remarkably, I decided to build the site using only HTML and pure JavaScript, without relying on external libraries or frameworks. This decision demonstrates my commitment to creating a custom and efficient platform for presenting the project's findings.</p>
+
+    <h2>AI-Generated Images</h2>
+    <p>I went a step further by generating unique images for the website using artificial intelligence (AI). Each image on the site is exclusive to this project, showcasing my innovative approach and attention to detail.</p>
+
+    <h2>Time and Personal Investment</h2>
+    <p>It is crucial to acknowledge that each of these steps required a substantial amount of time and personal investment from me. My dedication to ensuring the success of this project was unwavering.</p>
+
+    <h2>Motivation for the Challenge</h2>
+    <p>Lastly, my motivation to participate in the PACIFIC DATAVIZ CHALLENGE 2023 speaks volumes about my commitment to making a positive impact in the field of data visualization and environmental awareness.</p>
+
+    <p>In conclusion, my work on this project was characterized by meticulous data gathering, cleaning, and integration, creative problem-solving, and a strong personal investment of time and effort. My motivation to participate in the challenge and my commitment to sustainability and data transparency are evident in every aspect of my work.</p>
+
+<h2>To be continued...</h2>
+<p>While my participation in the PACIFIC DATAVIZ CHALLENGE 2023 reflects my dedication to advancing data visualization and environmental awareness, there's still much work ahead.
+  We can enhance this project by integrating more customization options, expanding the dataset to include additional years, and closely tracking year-to-year developments.
+  This is an ongoing mission, and there's more to come.</p>
+    <button id="close-dialog-button">Close</button>
+</dialog>
 <script>
     var introPlaying = false;
     var mttkShow = false;
@@ -81,6 +111,18 @@ function stopIntro(el,el2){
       introPlaying = false;
 }
 
+  const explanationDialog = document.getElementById('explanation-dialog');
+  const closeDialogButton = document.getElementById('close-dialog-button');
+
+function showDialog(){
+  explanationDialog.style.visibility =  'initial';
+}
+
+  closeDialogButton.addEventListener('click', () => {
+    explanationDialog.style.visibility =  'hidden';
+  });
+
+
 </script>
   <h1 class="title">South Pacific Carbon Foodprint</H1>
     
@@ -92,6 +134,8 @@ function stopIntro(el,el2){
         <br/>
         <!-- Read the blog post -->
         <button onclick="showOptions()" id="optionsBtn" class="big-button" >Options</button>
+        <br/>
+        <button onclick="showDialog()" id="dialogBtn" class="big-button" >About</button>
     </div>
   <div id="text0" class="text0 text map_infobox">
       Sugars and Sugar Confectionery

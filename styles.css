@@ -8,6 +8,19 @@
   --colorShadeE: #537895;
 }
 
+#explanation-dialog {
+  visibility: hidden;
+  z-index: 201;
+  overflow-y: initial;
+  display: block;
+  font-size: 80%;
+}
+
+
+#close-dialog-button{
+ background-color:  #09203f;
+}
+
 .speech {
   background-color:#fff;
   border:solid 2px #000;
@@ -583,8 +596,8 @@ button {
   text-transform: uppercase;
   font-family: inherit;
   width: 250px;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 button.big-button {
