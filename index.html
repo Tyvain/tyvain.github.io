@@ -1,0 +1,144 @@
+<html lang="en">
+    <script>
+        (function helloWorld() {
+        alert (" ")
+        })
+        </script>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css" />
+  <script src="./index.js" type="module"></script>
+  <title>RaizViz</title>
+
+</head>
+<body>
+
+<script>
+    var introPlaying = false;
+
+function launchintro() {
+  var button = document.getElementById('introBtn');
+  var el = document.getElementById('crawl');
+  var el2 = document.getElementById('fade');
+
+if (introPlaying){
+  button.innerText  = 'Play Introduction';
+  stopIntro(el,el2);
+ } else {
+  button.innerText  = 'Stop Introduction';
+  introPlaying=true;
+  el.style.animation = 'none';
+  el.offsetHeight; /* trigger reflow */
+  el.style.animation = null; 
+//var element = document. getElementById("crawl");
+ //element.classList.remove("animate"); 
+ el.style.visibility =  'initial';
+ el2.style.visibility =  'initial';
+console.log("Intro launched!");
+setTimeout(
+    function() {
+      stopIntro(el,el2)
+    }, 60000);
+ }
+
+  
+}
+
+function stopIntro(el,el2){
+  el.style.visibility =  'hidden';
+      el2.style.visibility =  'hidden';
+      introPlaying = false;
+}
+ 
+
+</script>
+  <h1 class="title">South Pacific Carbon Foodprint</H1>
+    <h5>(Scroll Mouse)</h5>
+    <div class="buttons">
+      <button  onclick="launchintro()" id="introBtn" class="big-button">Play Introduction</button>
+        <br/>
+        <button href="https://superdevresources.com" class="big-button">What is MKTT</button>
+        <br/>
+        <!-- Read the blog post -->
+        <button href="https://superdevresources.com/super-simple-ghost-button-css/" class="big-button" >Options</button>
+    </div>
+  <div id="text0" class="text0 text map_infobox">
+      Sugars and Sugar Confectionery
+      <br>MKTT: 18,504
+      <br>Percentage: 5.85%
+
+  </div>
+  <div id="text1" class="text1 text map_infobox-left">
+    Beverages, spirits and vinegar
+    <br>MKTT: 36,136
+    <br>Percentage: 11.42%
+  </div>
+  <div id="text2" class="text2 text map_infobox">
+      Cereals
+      <br>MKTT: 63,698
+      <br>Percentage: 20.13%
+  </div>
+  <div id="text3" class="text3 text map_infobox-left">
+      Animal,vegetable fats and oils, cleavage products
+      <br>MKTT: 114,891
+      <br>Percentage: 36.31%
+    </div>
+    <div id="text4" class="text4 text map_infobox">
+          Other food goods 
+          <br>MKTT: 70,240
+          <br>Percentage: 22.20%
+    </div>
+
+    <div id="fade" class="fade"></div>
+
+<section id="star-wars" class="star-wars">
+  <div id="crawl" class="crawl">
+    <div class="title">
+      <p>Episode II</p>
+      <h2>A New Hope</h2>
+    </div>
+    <p>
+      In the serene South Pacific, where palm trees whispered secrets to the gentle ocean breeze, a paradise known as Haven Atoll faced a challenge. 
+      The islanders, living in harmony with nature, had long relied on imported foods.
+       A visionary named SeaWalker, inspired by the Force of self-sufficiency, rose to lead.
+    </p>
+
+    <p> 
+        With the aid of a unique technology created by the South Pacific Community, islanders identified their main imported food sources. 
+        They realized the extent of their dependence and set out to change it.
+         Using ancient agricultural wisdom and sustainable fishing practices, they transformed the atoll into a haven of self-reliance.
+    </p>
+          <p> 
+            Years passed, and Haven Atoll thrived. 
+            The technology, now shared with neighboring islands, sparked a wave of self-sufficiency across the South Pacific. 
+            Haven Atoll had become a symbol of hope, proving that even in paradise, embracing self-reliance could lead to a brighter future for all.
+          </p>
+    </div>
+</section>
+
+  <div class="device-container">
+
+
+<!-- Eigenes Generic Smartphone  -->
+  <div class="mySmartphone">
+    <div class="mySmarphone arrow-left"></div>
+    <span class="hamburger"></span>
+    <div class="mySmarphone nook"> </div>
+    <div class="mySmarphone myPower"> </div>
+    <div class="content">
+      <div class="wrap">
+          <div id="water-container" class="inside-screen">
+            <div class="water" id="water4"></div>
+            <div class="water" id="water3"></div>
+            <div class="water" id="water2"></div>
+            <div class="water" id="water1"></div>
+            <div class="water" id="water0"></div>
+          </div>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
