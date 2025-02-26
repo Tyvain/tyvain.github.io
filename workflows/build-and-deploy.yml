@@ -1,0 +1,29 @@
+name: Copy md files to Ionos
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    container:
+      image: alpine:latest
+
+    steps:
+      - name: Set KEY_STORE_PASSWORD environment variable
+        run: echo "KEY_STORE_PASSWORD=${{ secrets.KEY_STORE_PASSWORD }}" >> $GITHUB_ENV
+
+      - name: Set up SSH key
+        run: |
+          echo "${{ secrets.REMOTE_SSH_KEY }}" > ssh_key
+          chmod 600 ssh_key
+
+      - name: Remove existing files 
+        run: |
+          ssh -i ssh_key -o StrictHostKeyChecking=no root@${{ secrets.REMOTE_HOST }} "sudo rm -rf ~/marp/*"
+
+      - name: Copy files to the server
+        run: |
+          rsync -avz --exclude='workflows/' ./* root@${{ secrets.REMOTE_HOST }}:~/marp
+
