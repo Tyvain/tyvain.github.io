@@ -26,5 +26,4 @@ jobs:
 
       - name: Copy files to the server
         run: |
-          rsync -avz --exclude='workflows/' ./* root@${{ secrets.REMOTE_HOST }}:~/marp
-
+          rsync -avz --exclude='workflows/' ./* root@${{ secrets.REMOTE_HOST }}:~/marp 
