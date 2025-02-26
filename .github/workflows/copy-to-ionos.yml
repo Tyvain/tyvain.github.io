@@ -1,28 +1,29 @@
-name: Copy md files to Ionos
+name: Deploy to Remote Server
 
 on:
   push:
     branches:
-      - master
+      - main  # Change selon la branche que tu veux déployer
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set KEY_STORE_PASSWORD environment variable
-        run: echo "KEY_STORE_PASSWORD=${{ secrets.KEY_STORE_PASSWORD }}" >> $GITHUB_ENV
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up SSH key
+      - name: Setup SSH Key
         run: |
-          echo "${{ secrets.REMOTE_SSH_KEY }}" > ssh_key
-          chmod 600 ssh_key
+          mkdir -p ~/.ssh
+          echo "${{ secrets.REMOTE_SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.REMOTE_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Remove existing files 
+      - name: Clean remote directory
         run: |
-          ssh -i ssh_key -o StrictHostKeyChecking=no root@${{ secrets.REMOTE_HOST }} "sudo rm -rf ~/marp/*"
+          ssh ubuntu@${{ secrets.REMOTE_HOST }} "rm -rf ~/marp/*"
 
-      - name: Copy files to the server
+      - name: Deploy files via SCP
         run: |
-          rsync -avz --exclude='workflows/' ./* root@${{ secrets.REMOTE_HOST }}:~/marp
-
+          rsync -av --exclude='.github' . ubuntu@${{ secrets.REMOTE_HOST }}:~/marp/
