@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Marp Slides</title>
+</head>
+<body>
+    <h1>Mes Slides</h1>
+    <ul>
+        <% slides.forEach(slide => { %>
+            <li><a href="/<%= slide %>"><%= slide %></a></li>
+        <% }); %>
+    </ul>
+</body>
+</html>
