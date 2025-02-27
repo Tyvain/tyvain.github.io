@@ -1,11 +1,11 @@
 ---
 marp: true
-theme: default
+theme: academic
 paginate: true
 ---
 
 # Communiquer
-
+<!-- _header: Truc -->
 ---
 
 ## Questions interactives
