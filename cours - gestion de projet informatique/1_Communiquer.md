@@ -1,22 +1,19 @@
 ---
 marp: true
-theme: academic
+theme: unc
 paginate: true
+header: GPI - Communiquer
 ---
 
-# Communiquer
-
----
-<!-- _header: Truc -->
-## Questions interactives
+# Questions interactives
 
 [https://www.mentimeter.com/app/presentation/alcqovs3shvxmikjjmnth22vxfe8n23k/edit?question=g7krjfh7ydrk&seriesId=alcqovs3shvxmikjjmnth22vxfe8n23k](https://www.mentimeter.com/app/presentation/alcqovs3shvxmikjjmnth22vxfe8n23k/edit?question=g7krjfh7ydrk&seriesId=alcqovs3shvxmikjjmnth22vxfe8n23k)
 
 ---
 
-## Intro
+# Intro
 
-### Quelques chiffres - prjets informatiques
+## Quelques chiffres - prjets informatiques
 
 - **31,1%** sont **stoppés** en cours de route et ne sont donc jamais déployés.
 
@@ -24,20 +21,19 @@ paginate: true
 
 ---
 
-## Motifs d'échecs
+# Motifs d'échecs
 
 ![Untitled](Untitled.png)
 
 ---
+# Motifs d'échecs
 
+## Résumé des stats
 - Participation des utilisateurs
 - Soutien de la direction
 - Énoncé clair des besoins
 
---- 
-
-### Pour moi:
-
+## Pour moi
 - Mauvaises spécifications métiers (client)
 - Code de mauvaise qualité
 - Problèmes de communication
