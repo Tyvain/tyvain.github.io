@@ -44,37 +44,41 @@
         }
         
         header {
-            text-align: center;
             color: var(--white-color);
-            padding: 2rem;
+            padding: 1.5rem 2rem;
             margin: -2rem -2rem 2rem -2rem;
             border-radius: 8px 8px 0 0;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
         }
         
         .header-content {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
+            width: 100%;
         }
         
         .profile-photo {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             border-radius: 50%;
             object-fit: cover;
-            border: 4px solid var(--white-color);
+            border: 3px solid var(--white-color);
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            flex-shrink: 0;
         }
         
         .header-text {
-            text-align: center;
+            text-align: left;
+            flex-grow: 1;
         }
         
         h1 {
             font-family: 'Montserrat', sans-serif;
-            font-size: 2.5rem;
+            font-size: 2rem;
             margin: 0;
             color: var(--white-color);
             text-transform: uppercase;
@@ -82,17 +86,23 @@
         }
         
         .title {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
+            font-size: 1rem;
+            margin: 0.2rem 0 0.5rem 0;
             color: var(--light-color);
             font-weight: 400;
+        }
+
+        .degree {
+            font-size: 0.9rem;
+            color: var(--light-color);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
         }
         
         .contact-info {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 1.5rem;
-            margin-top: 1rem;
         }
         
         .contact-info a {
@@ -316,12 +326,12 @@
                 <div class="header-text">
                     <h1>Sylvain Auger-Léger</h1>
                     <h2 class="title">Chef de Projet Informatique - Urbaniste SI - DevOps</h2>
-                </div>
-                <div class="contact-info">
-                    <a href="tel:+687805868"><i class="fas fa-phone"></i> +687 80 58 68</a>
-                    <a href="mailto:sylvain.auger-leger@unc.nc"><i class="fas fa-envelope"></i> sylvain.auger-leger@unc.nc</a>
-                    <a href="https://www.linkedin.com/in/votreprofil" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
-                    <a href="https://github.com/tyvain" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    <div class="degree">Master's Degree in Software Engineering</div>
+                    <div class="contact-info">
+                        <a href="tel:+687805868"><i class="fas fa-phone"></i> +687 80 58 68</a>
+                        <a href="mailto:sylvain.auger-leger@unc.nc"><i class="fas fa-envelope"></i> sylvain.auger-leger@unc.nc</a>
+                        <a href="https://github.com/tyvain" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
                 </div>
             </div>
         </header>
@@ -360,33 +370,19 @@
                 </div>
                 <div class="experience-item">
                     <div class="job-title">Ingénieur Développeur (Spring / Java)</div>
-                    <div class="company">Direction du numérique (DINUM)</div>
+                    <div class="company">Multiples contextes (Service Public, Startups, Freelance)</div>
                     <div class="date">2007 - 2013</div>
-                </div>
-            </section>
-            
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-graduation-cap"></i> Formation</h2>
-                <div class="experience-item">
-                    <div class="job-title">Master en Ingénierie Logicielle</div>
-                    <div class="company">Université de Nice Sophia Antipolis</div>
-                    <div class="date">2005 - 2007</div>
-                </div>
-                <div class="experience-item">
-                    <div class="job-title">DUT en Informatique</div>
-                    <div class="company">IUT de Nice</div>
-                    <div class="date">2003 - 2005</div>
                 </div>
             </section>
 
             <section class="section">
-                <h2 class="section-title"><i class="fas fa-tools"></i> Compétences</h2>
+                <h2 class="section-title"><i class="fas fa-star"></i> Compétences & Divers</h2>
                 <div class="skills-container">
                     
                     <div class="skill-category">
                         <h4><i class="fas fa-tasks"></i> Gestion de Projet</h4>
                         <ul class="skills-list">
-                            <li>PMBOK</li><li>Itil</li><li>Prince2</li><li>Lean</li><li>Scrum</li><li>Kanban</li>
+                            <li>PMBOK</li><li>Itil (Certifié)</li><li>Prince2</li><li>Lean</li><li>Scrum</li><li>Kanban</li>
                         </ul>
                     </div>
                     <div class="skill-category">
@@ -407,38 +403,20 @@
                             <li>Autonomie</li><li>Service client</li><li>Rigueur</li><li>Vulgarisation</li><li>Communication</li>
                         </ul>
                     </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-globe"></i> Langues</h2>
-                <div class="skills-container">
                     <div class="skill-category">
                         <h4><i class="fas fa-language"></i> Langues</h4>
                         <ul class="skills-list">
                             <li>Français (Natif)</li>
                             <li>Anglais (Courant)</li>
-                            <li>Espagnol (Notions)</li>
                         </ul>
                     </div>
-                </div>
-            </section>
-
-            <section class="section">
-                <h2 class="section-title"><i class="fas fa-heart"></i> Centres d'intérêt</h2>
-                <div class="skills-container">
                     <div class="skill-category">
                         <h4><i class="fas fa-running"></i> Sports</h4>
                         <ul class="skills-list">
-                            <li>Course à pied</li>
                             <li>Natation</li>
-                        </ul>
-                    </div>
-                    <div class="skill-category">
-                        <h4><i class="fas fa-book-open"></i> Lecture</h4>
-                        <ul class="skills-list">
-                            <li>Science-Fiction</li>
-                            <li>Fantasy</li>
+                            <li>Surf</li>
+                            <li>Wingfoil</li>
+                            <li>Football</li>
                         </ul>
                     </div>
                 </div>
