@@ -3,10 +3,14 @@
   "version": "1.0.0",
   "description": "Site personnel avec présentations Marpit",
   "scripts": {
-    "convert": "find pagesmd -name '*.md' | xargs -I {} sh -c 'out=pageshtml/$(dirname {#pagesmd/}); mkdir -p $out; marpit {} -o $out/$(basename {} .md).html'"
+    "convert": "find pagesmd -name '*.md' | xargs -I {} sh -c 'out=pageshtml/$(dirname {#pagesmd/}); mkdir -p $out; marpit {} -o $out/$(basename {} .md).html'",
+    "pdf": "node generate-pdf.js"
   },
   "dependencies": {
     "@marp-team/marp-cli": "^3.4.4"
+  },
+  "devDependencies": {
+    "puppeteer": "^19.7.5"
   },
   "engines": {
     "node": ">=16.0.0"
