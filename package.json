@@ -10,7 +10,7 @@
     "@marp-team/marp-cli": "^4.2.1"
   },
   "devDependencies": {
-    "puppeteer": "^19.7.5"
+    "puppeteer": "^24.15.0"
   },
   "engines": {
     "node": ">=16.0.0"
