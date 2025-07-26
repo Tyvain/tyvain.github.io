@@ -7,6 +7,7 @@ on:
     paths:
       - 'index.html'
       - 'generate-pdf.js'
+      - '.github/workflows/generate-pdf.yml'
 
 jobs:
   build:
