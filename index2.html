@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>CV - Sylvain Auger-Léger</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo+Narrow&family=Julius+Sans+One&family=Open+Sans&family=Source+Sans+Pro&display=swap" rel="stylesheet">
+  <style>
+    body { 
+      background: rgb(204,204,204); 
+      width: 21cm; 
+      height: 29.7cm; 
+      margin: 0 auto; 
+    }
+    
+    page { 
+      background: white; 
+      display: block; 
+      margin: 0 auto 0.5cm; 
+    }
+    
+    page[size="A4"] { 
+      width: 21cm; 
+      height: 29.7cm; 
+    }
+    
+    @page { 
+      size: 21cm 29.7cm; 
+      margin: 0; 
+      padding: 0; 
+    }
+    
+    .container { 
+      display: flex; 
+      flex-direction: row; 
+      width: 100%; 
+      height: 100%; 
+    }
+    
+    .leftPanel { 
+      width: 27%; 
+      background-color: #484444; 
+      padding: 0.7cm; 
+      display: flex; 
+      flex-direction: column; 
+      align-items: center; 
+    }
+    
+    .rightPanel { 
+      width: 73%; 
+      padding: 0.7cm; 
+    }
+    
+    .item { 
+      padding-bottom: 0.7cm; 
+      padding-top: 0.7cm; 
+    }
+    
+    .item h2 { 
+      margin-top: 0; 
+    }
+    
+    .bottomLineSeparator { 
+      border-bottom: 0.05cm solid white; 
+    }
+    
+    h1 { 
+      font-family: 'Julius Sans One', sans-serif; 
+      font-weight: 300; 
+      font-size: 1.2cm; 
+      transform: scale(1, 1.15); 
+      margin: 0.2cm 0; 
+      text-transform: uppercase; 
+      color: #111; 
+    }
+    
+    h2 { 
+      font-family: 'Archivo Narrow', sans-serif; 
+      font-size: 0.5cm; 
+      margin: 0.3cm 0; 
+      color: white; 
+      text-transform: uppercase; 
+    }
+    
+    h3, p, a, .smallText { 
+      font-family: 'Source Sans Pro', sans-serif; 
+      font-size: 0.4cm; 
+      text-align: justify; 
+    }
+    
+    .leftPanel .smallText, 
+    .leftPanel a { 
+      color: #bebebe; 
+      font-size: 0.45cm; 
+      text-decoration: none; 
+    }
+    
+    img { 
+      width: 4cm; 
+      height: 4cm; 
+      margin-bottom: 0.7cm; 
+      border-radius: 50%; 
+      border: 0.15cm solid white; 
+      object-fit: cover; 
+      object-position: 50% 50%; 
+    }
+    
+    .details { 
+      width: 100%; 
+      display: flex; 
+      flex-direction: column; 
+    }
+    
+    .contactIcon { 
+      width: 0.5cm; 
+      text-align: center; 
+      margin-right: 0.2cm;
+    }
+    
+    p { 
+      margin: 0.15cm 0; 
+    }
+  </style>
+</head>
+<body>
+  <page size="A4">
+    <div class="container">
+      <div class="leftPanel">
+        <img src="./me.jpg" alt="Photo de profil"/>
+        <div class="details">
+          <div class="item bottomLineSeparator">
+            <h2>CONTACT</h2>
+            <div class="smallText">
+              <p><i class="fa fa-phone contactIcon" aria-hidden="true"></i> +687 80 58 68</p>
+              <p><i class="fa fa-envelope contactIcon" aria-hidden="true"></i> sylvain.auger-leger@unc.nc</p>
+              <p><i class="fa fa-github contactIcon" aria-hidden="true"></i> github.com/tyvain</p>
+            </div>
+          </div>
+          
+          <div class="item bottomLineSeparator">
+            <h2>COMPÉTENCES</h2>
+            <div class="smallText">
+              <p><strong>Gestion de Projet:</strong> PMBOK, ITIL, Prince2, Lean, Scrum, Kanban</p>
+              <p><strong>DevOps:</strong> GitLab CI/CD, Kubernetes</p>
+              <p><strong>Développement:</strong> Java, Spring, Spring Boot</p>
+              <p><strong>Système:</strong> Linux, Windows, Virtualisation</p>
+              <p><strong>Soft Skills:</strong> Autonomie, Service client, Rigueur, Vulgarisation</p>
+            </div>
+          </div>
+          
+          <div class="item bottomLineSeparator">
+            <h2>LANGUES</h2>
+            <div class="smallText">
+              <p>Français (Natif)</p>
+              <p>Anglais (Courant)</p>
+            </div>
+          </div>
+          
+          <div class="item">
+            <h2>CENTRES D'INTÉRÊT</h2>
+            <div class="smallText">
+              <p>Natation, Surf, Wingfoil, Football</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="rightPanel">
+        <h1>Sylvain Auger-Léger</h1>
+        <p class="smallText" style="color: #3498db; margin-bottom: 0.5cm;">Chef de Projet Informatique - Urbaniste SI - DevOps</p>
+        
+        <div class="item">
+          <h2>À PROPOS</h2>
+          <p class="smallText">
+            Professionnel expérimenté dans la gestion de projets informatiques et l'urbanisme des systèmes d'information. 
+            Expertise en mise en place de solutions DevOps et en amélioration des processus IT.
+          </p>
+        </div>
+        
+        <div class="item">
+          <h2>EXPÉRIENCE PROFESSIONNELLE</h2>
+          
+          <div style="margin-bottom: 0.7cm;">
+            <h3>Chef de projet / Urbaniste SI / DevOps</h3>
+            <p class="smallText" style="font-weight: bold; margin-bottom: 0.2cm;">Université de la Nouvelle-Calédonie</p>
+            <p class="smallText">2018 - à ce jour</p>
+            <ul style="padding-left: 1cm; margin: 0.3cm 0;">
+              <li>Pilotage de la mise en place d'un système d'aide à la décision (SID) complet.</li>
+              <li>Responsable de la mise en œuvre d'une usine logicielle moderne (GitLab CI/CD, Kubernetes).</li>
+              <li>Coordination des audits de sécurité et du plan d'action correctif (ANSSI).</li>
+              <li>Contribution au développement de la maturité ITIL/ITSM.</li>
+              <li>Accompagnement et formation des équipes aux pratiques DevOps.</li>
+              <li>Support de niveau 3 technique et fonctionnel.</li>
+              <li>Enseignement du cours "Gestion de Projets Informatiques et gouvernance IT".</li>
+            </ul>
+          </div>
+          
+          <div style="margin-bottom: 0.7cm;">
+            <h3>Responsable de la Division Fiscalité</h3>
+            <p class="smallText" style="font-weight: bold; margin-bottom: 0.2cm;">Direction du numérique (DINUM)</p>
+            <p class="smallText">2013 - 2018</p>
+            <ul style="padding-left: 1cm; margin: 0.3cm 0;">
+              <li>Encadrement et animation d'une équipe de 8 ingénieurs.</li>
+              <li>Pilotage stratégique du portefeuille de projets numériques liés à la fiscalité.</li>
+              <li>Gestion de projets à fort impact national (portail de télédéclaration, etc.).</li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3>Ingénieur Développeur (Spring / Java)</h3>
+            <p class="smallText" style="font-weight: bold; margin-bottom: 0.2cm;">Multiples contextes (Service Public, Startups, Freelance)</p>
+            <p class="smallText">2007 - 2013</p>
+          </div>
+      </div>
+    </div>
+  </page>
+</body>
+</html>

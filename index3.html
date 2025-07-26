@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sylvain Auger-Léger - CV</title>
+  <style>
+    :root {
+      --primary: #1a1a1a;
+      --secondary: #555;
+      --accent: #4a90e2;
+      --bg: #ffffff;
+      --muted: #f5f5f5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, sans-serif;
+      background: var(--muted);
+      color: var(--primary);
+      line-height: 1.6;
+    }
+
+    .cv-container {
+      max-width: 1000px;
+      margin: 40px auto;
+      background: var(--bg);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      overflow: hidden;
+    }
+
+    .cv-sidebar {
+      background: var(--primary);
+      color: #fff;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cv-sidebar img {
+      border-radius: 50%;
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      margin-bottom: 20px;
+    }
+
+    .cv-sidebar h2 {
+      margin-bottom: 10px;
+      font-size: 20px;
+      color: #fff;
+    }
+
+    .cv-sidebar p {
+      font-size: 14px;
+      margin-bottom: 8px;
+      color: #ccc;
+      text-align: center;
+    }
+
+    .section-title {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 18px;
+      margin-top: 30px;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 5px;
+    }
+
+    .cv-main {
+      padding: 40px;
+    }
+
+    .section {
+      margin-bottom: 30px;
+    }
+
+    .job {
+      margin-bottom: 20px;
+    }
+
+    .job-title {
+      font-weight: bold;
+    }
+
+    .job-period {
+      float: right;
+      font-style: italic;
+      color: var(--secondary);
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    .skills-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+
+    .skills-columns ul {
+      list-style: square;
+    }
+
+    .reference-list {
+      list-style: none;
+      padding-left: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+    <div class="cv-sidebar">
+      <img src="me.jpg" alt="Photo de Sylvain">
+      <h2>Sylvain Auger-Léger</h2>
+      <p>Chef de Projet Informatique</p>
+      <p>Urbaniste SI - DevOps</p>
+      <p>45 ans</p>
+      <p>Master en Génie Logiciel</p>
+      <div class="section-title">Contact</div>
+      <p>📞 +687 80 58 68</p>
+      <p>✉️ sylvain.auger-leger@unc.nc</p>
+      <div class="section-title">Soft Skills</div>
+      <ul>
+        <li>Autonomie, sens du service</li>
+        <li>Rigueur technique</li>
+        <li>Vulgarisation IT</li>
+        <li>Esprit d'équipe</li>
+        <li>Anglais courant</li>
+      </ul>
+    </div>
+    <div class="cv-main">
+      <div class="section">
+        <div class="section-title">Résumé</div>
+        <p>
+          Ingénieur polyvalent avec plus de 15 ans d'expérience en développement, administration, DevOps et gestion de projets IT. Expérience significative dans l’enseignement supérieur, en contact direct avec les équipes pédagogiques. Fort intérêt pour les missions de proximité, l’assistance technique et la mise en place d’outils pédagogiques.
+        </p>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Expérience professionnelle</div>
+
+        <div class="job">
+          <div class="job-title">Chef de projet / Urbaniste SI / DevOps <span class="job-period">2018 - à ce jour</span></div>
+          <div>Université de la Nouvelle-Calédonie</div>
+          <ul>
+            <li>Pilotage d’un SID (architecture, ETL, univers, intégration utilisateurs)</li>
+            <li>Usine logicielle GitLab CI/CD + Kubernetes</li>
+            <li>Homologation ANSSI avec Ornisec</li>
+            <li>Mise en place ITIL/ITSM (documentation, support)</li>
+            <li>Projets DevOps avec le pôle Réseau</li>
+            <li>Formations sur outils et méthodes agiles</li>
+            <li>Support niveau 3 aux utilisateurs</li>
+            <li>Enseignement IT & Gouvernance (L3)</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Responsable de la Division Fiscalité <span class="job-period">2013 - 2018</span></div>
+          <div>Direction du numérique (DINUM)</div>
+          <ul>
+            <li>Encadrement de 8 ingénieurs</li>
+            <li>Pilotage stratégique de projets fiscaux</li>
+            <li>Coordination interservices gouvernementaux</li>
+            <li>Portail fiscal, identifiant unique, dématérialisation</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Ingénieur Développeur (Spring / Java) <span class="job-period">2007 - 2013</span></div>
+          <div>Direction du numérique (DINUM)</div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Compétences techniques</div>
+        <div class="skills-columns">
+          <div>
+            <strong>Gestion de projet</strong>
+            <ul>
+              <li>PMBOK</li>
+              <li>ITIL</li>
+              <li>Prince2</li>
+              <li>Lean</li>
+              <li>Scrum</li>
+              <li>Kanban</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Dev / DevOps / Cloud</strong>
+            <ul>
+              <li>Java</li>
+              <li>Spring / Spring Boot</li>
+              <li>GitLab CI/CD</li>
+              <li>Kubernetes</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Administration systèmes</strong>
+            <ul>
+              <li>Linux / Ubuntu</li>
+              <li>Windows</li>
+              <li>KVM, VirtualBox</li>
+              <li>Supervision, sauvegardes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-title">Références</div>
+        <ul class="reference-list">
+          <li>Emmanuel Geze – Développeur – emmanuel.geze@unc.nc – +687 512213</li>
+          <li>Sylvain Michel – Chef de projet SI – sylvainmichelfr@gmail.com – +687 747356</li>
+          <li>Vincent Lavergne – Agence digitale NC – vincent@tealforge.com – +687 944363</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
