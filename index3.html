@@ -5,13 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sylvain Auger-Léger - CV</title>
   <style>
-    :root {
-      --primary: #1a1a1a;
-      --secondary: #555;
-      --accent: #4a90e2;
-      --bg: #ffffff;
-      --muted: #f5f5f5;
-    }
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
     * {
       box-sizing: border-box;
@@ -19,27 +13,31 @@
       padding: 0;
     }
 
-    body {
-      font-family: 'Segoe UI', Tahoma, sans-serif;
-      background: var(--muted);
-      color: var(--primary);
-      line-height: 1.6;
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.5;
+      font-size: 12px;
+      width: 100%;
+      height: 100%;
     }
 
     .cv-container {
-      max-width: 1000px;
-      margin: 40px auto;
-      background: var(--bg);
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      display: grid;
-      grid-template-columns: 300px 1fr;
-      overflow: hidden;
+      display: flex;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 20px;
+      gap: 20px;
+      page-break-inside: avoid;
     }
 
     .cv-sidebar {
-      background: var(--primary);
-      color: #fff;
-      padding: 30px;
+      flex: 0 0 240px;
+      background: #1a1a1a;
+      color: white;
+      padding: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -47,74 +45,118 @@
 
     .cv-sidebar img {
       border-radius: 50%;
-      width: 120px;
-      height: 120px;
+      width: 90px;
+      height: 90px;
       object-fit: cover;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     .cv-sidebar h2 {
-      margin-bottom: 10px;
-      font-size: 20px;
-      color: #fff;
-    }
-
-    .cv-sidebar p {
-      font-size: 14px;
-      margin-bottom: 8px;
-      color: #ccc;
+      font-size: 16px;
+      margin-bottom: 5px;
       text-align: center;
     }
 
-    .section-title {
-      color: var(--accent);
-      font-weight: bold;
-      font-size: 18px;
-      margin-top: 30px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 5px;
+    .cv-sidebar p {
+      font-size: 11px;
+      margin: 3px 0;
+      text-align: center;
+    }
+
+    .cv-sidebar .section-title {
+      font-size: 12px;
+      color: #4a90e2;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #444;
+      width: 100%;
+      text-align: left;
+      padding-bottom: 2px;
     }
 
     .cv-main {
-      padding: 40px;
+      flex: 1;
     }
 
     .section {
-      margin-bottom: 30px;
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a90e2;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 2px;
     }
 
     .job {
-      margin-bottom: 20px;
+      margin-bottom: 10px;
     }
 
     .job-title {
-      font-weight: bold;
+      font-weight: 600;
     }
 
     .job-period {
       float: right;
       font-style: italic;
-      color: var(--secondary);
+      font-weight: 400;
+      color: #777;
     }
 
     ul {
       padding-left: 20px;
+      margin: 3px 0 8px 0;
+      font-size: 11px;
     }
 
     .skills-columns {
       display: flex;
       flex-wrap: wrap;
-      gap: 40px;
+      gap: 20px;
+      font-size: 11px;
     }
 
     .skills-columns ul {
       list-style: square;
+      padding-left: 15px;
     }
 
     .reference-list {
       list-style: none;
+      font-size: 11px;
       padding-left: 0;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
+        margin: 0;
+        padding: 0;
+        -webkit-print-color-adjust: exact;
+        zoom: 100%;
+        overflow: hidden;
+      }
+
+      .cv-container {
+        width: 210mm;
+        height: 297mm;
+        padding: 0;
+        margin: 0;
+        gap: 0;
+      }
+
+      .cv-sidebar, .cv-main {
+        padding: 10mm;
+      }
     }
   </style>
 </head>
@@ -132,9 +174,9 @@
       <p>✉️ sylvain.auger-leger@unc.nc</p>
       <div class="section-title">Soft Skills</div>
       <ul>
-        <li>Autonomie, sens du service</li>
-        <li>Rigueur technique</li>
-        <li>Vulgarisation IT</li>
+        <li>Autonomie</li>
+        <li>Rigueur</li>
+        <li>Vulgarisation</li>
         <li>Esprit d'équipe</li>
         <li>Anglais courant</li>
       </ul>
@@ -146,10 +188,8 @@
           Ingénieur polyvalent avec plus de 15 ans d'expérience en développement, administration, DevOps et gestion de projets IT. Expérience significative dans l’enseignement supérieur, en contact direct avec les équipes pédagogiques. Fort intérêt pour les missions de proximité, l’assistance technique et la mise en place d’outils pédagogiques.
         </p>
       </div>
-
       <div class="section">
         <div class="section-title">Expérience professionnelle</div>
-
         <div class="job">
           <div class="job-title">Chef de projet / Urbaniste SI / DevOps <span class="job-period">2018 - à ce jour</span></div>
           <div>Université de la Nouvelle-Calédonie</div>
@@ -162,9 +202,9 @@
             <li>Formations sur outils et méthodes agiles</li>
             <li>Support niveau 3 aux utilisateurs</li>
             <li>Enseignement IT & Gouvernance (L3)</li>
+            <li>Pilotage de la dématérialisation des inscriptions : coordination métier, intégration parcoursup/moonmaster, prestataires et partenaires publics</li>
           </ul>
         </div>
-
         <div class="job">
           <div class="job-title">Responsable de la Division Fiscalité <span class="job-period">2013 - 2018</span></div>
           <div>Direction du numérique (DINUM)</div>
@@ -175,13 +215,11 @@
             <li>Portail fiscal, identifiant unique, dématérialisation</li>
           </ul>
         </div>
-
         <div class="job">
           <div class="job-title">Ingénieur Développeur (Spring / Java) <span class="job-period">2007 - 2013</span></div>
           <div>Direction du numérique (DINUM)</div>
         </div>
       </div>
-
       <div class="section">
         <div class="section-title">Compétences techniques</div>
         <div class="skills-columns">
@@ -216,7 +254,6 @@
           </div>
         </div>
       </div>
-
       <div class="section">
         <div class="section-title">Références</div>
         <ul class="reference-list">
