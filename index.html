@@ -1,648 +1,273 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>CV - Sylvain Auger-Léger</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link
-      rel="preconnect"
-      href="https://fonts.gstatic.com"
-      crossorigin
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      :root {
-        --primary-color: #2c3e50;
-        --secondary-color: #3498db;
-        --light-color: #ecf0f1;
-        --dark-color: #2c3e50;
-        --text-color: #333;
-        --text-light: #7f8c8d;
-        --background-color: #f5f7fa;
-        --white-color: #ffffff;
-        --border-color: #e0e0e0;
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sylvain Auger-Léger - CV</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
 
-      * {
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      font-family: 'Open Sans', sans-serif;
+      background: #ffffff;
+      color: #1a1a1a;
+      line-height: 1.5;
+      font-size: 12px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .cv-container {
+      display: flex;
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      gap: 20px;
+      overflow: hidden;
+    }
+
+    .cv-sidebar {
+      flex: 0 0 240px;
+      background: #1a1a1a;
+      color: white;
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .cv-sidebar img {
+      border-radius: 50%;
+      width: 90px;
+      height: 90px;
+      object-fit: cover;
+      margin-bottom: 15px;
+    }
+
+    .cv-sidebar h2 {
+      font-size: 16px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .cv-sidebar p {
+      font-size: 11px;
+      margin: 3px 0;
+      text-align: center;
+    }
+
+    .cv-sidebar .section-title {
+      font-size: 12px;
+      color: #4a90e2;
+      margin-top: 15px;
+      margin-bottom: 8px;
+      border-bottom: 1px solid #444;
+      width: 100%;
+      text-align: left;
+      padding-bottom: 2px;
+    }
+
+    .cv-main {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .section {
+      margin-bottom: 15px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #4a90e2;
+      margin-bottom: 6px;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 2px;
+    }
+
+    .job {
+      margin-bottom: 10px;
+    }
+
+    .job-title {
+      font-weight: 600;
+    }
+
+    .job-period {
+      float: right;
+      font-style: italic;
+      font-weight: 400;
+      color: #777;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 3px 0 8px 0;
+      font-size: 11px;
+    }
+
+    .skills-columns {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      font-size: 11px;
+    }
+
+    .skills-columns ul {
+      list-style: square;
+      padding-left: 15px;
+    }
+
+    .reference-list {
+      list-style: none;
+      font-size: 11px;
+      padding-left: 0;
+    }
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+
+    @media print {
+      html, body {
+        width: 210mm;
+        height: 297mm;
         margin: 0;
         padding: 0;
-        box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Lato", sans-serif;
-        line-height: 1.6;
-        color: var(--text-color);
-        background-color: var(--background-color);
-      }
-
-      .container {
-        max-width: 1100px;
-        margin: 2rem auto;
-        background: var(--white-color);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        border-radius: 8px;
-        display: flex;
+        -webkit-print-color-adjust: exact;
         overflow: hidden;
       }
 
-      .sidebar {
-        width: 35%;
-        background-color: var(--primary-color);
-        color: var(--light-color);
-        padding: 2rem;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .main-content {
-        width: 65%;
-        padding: 3rem;
-      }
-
-      .profile-photo {
-        width: 150px;
-        height: 150px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 5px solid var(--secondary-color);
-        margin-bottom: 1.5rem;
-      }
-
-      .sidebar-section {
+      .cv-container {
         width: 100%;
-        margin-bottom: 2rem;
-      }
-
-      .sidebar-title {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.3rem;
-        color: var(--white-color);
-        border-bottom: 2px solid var(--secondary-color);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-      }
-
-      .contact-info a {
-        color: var(--light-color);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        margin-bottom: 0.8rem;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-      }
-
-      .contact-info a:hover {
-        color: var(--secondary-color);
-      }
-
-      .contact-info i {
-        width: 20px;
-        text-align: center;
-      }
-
-      .skills-list {
-        list-style: none;
+        height: 100vh;
         padding: 0;
-      }
-
-      .skills-list li {
-        padding: 0.3rem 0;
-        font-size: 0.9rem;
-      }
-
-      .header {
-        margin-bottom: 3rem;
-      }
-
-      h1 {
-        font-family: "Montserrat", sans-serif;
-        font-size: 2.8rem;
         margin: 0;
-        color: var(--dark-color);
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
+        gap: 0;
+        page-break-after: avoid;
+        page-break-before: avoid;
+        page-break-inside: avoid;
+        overflow: hidden;
       }
 
-      .title {
-        font-size: 1.2rem;
-        margin: 0.2rem 0 0.5rem 0;
-        color: var(--secondary-color);
-        font-weight: 700;
+      .cv-sidebar, .cv-main {
+        padding: 10mm;
       }
-
-      .degree {
-        font-size: 1rem;
-        color: var(--text-light);
-        font-weight: 400;
-      }
-
-      .section {
-        margin-bottom: 2.5rem;
-      }
-
-      .section-title {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.5rem;
-        color: var(--primary-color);
-        border-bottom: 3px solid var(--secondary-color);
-        padding-bottom: 0.5rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-      }
-
-      .section-title i {
-        color: var(--secondary-color);
-      }
-
-      .experience-item {
-        margin-bottom: 2rem;
-        padding-left: 1.5rem;
-        border-left: 3px solid var(--secondary-color);
-        position: relative;
-      }
-
-      .experience-item::before {
-        content: "";
-        position: absolute;
-        left: -8px;
-        top: 5px;
-        width: 14px;
-        height: 14px;
-        border-radius: 50%;
-        background-color: var(--secondary-color);
-        border: 2px solid var(--white-color);
-      }
-
-      .job-title {
-        font-family: "Montserrat", sans-serif;
-        font-size: 1.2rem;
-        font-weight: 700;
-        color: var(--dark-color);
-      }
-
-      .company {
-        font-weight: 700;
-        color: var(--text-color);
-      }
-
-      .date {
-        color: var(--text-light);
-        font-style: italic;
-        margin-bottom: 0.5rem;
-      }
-
-      ul.tasks {
-        list-style-type: none;
-        padding-left: 0;
-      }
-
-      ul.tasks li {
-        position: relative;
-        padding-left: 1.2rem;
-        margin-bottom: 0.5rem;
-      }
-
-      ul.tasks li:before {
-        content: "▸";
-        color: var(--secondary-color);
-        position: absolute;
-        left: 0;
-        font-size: 1.2rem;
-        line-height: 1;
-      }
-
-      footer {
-        text-align: center;
-        margin-top: 2rem;
-        padding-top: 1rem;
-        border-top: 1px solid var(--border-color);
-        color: var(--text-light);
-        font-size: 0.8rem;
-      }
-
-      @media (max-width: 992px) {
-        .container {
-          flex-direction: column;
-          margin: 0;
-          border-radius: 0;
-        }
-        .sidebar,
-        .main-content {
-          width: 100%;
-        }
-        .main-content {
-          padding: 2rem;
-        }
-        h1 {
-          font-size: 2.2rem;
-        }
-      }
-
-      @media print {
-        body {
-          font-size: 10pt;
-          background-color: var(--white-color);
-        }
-        .container {
-          flex-direction: column;
-          box-shadow: none;
-          margin: 0;
-          padding: 0;
-          width: 100%;
-          max-width: 100%;
-        }
-        .sidebar {
-          width: 100%;
-          background-color: var(--white-color) !important;
-          color: var(--dark-color) !important;
-          padding: 0 0 1rem 0;
-          -webkit-print-color-adjust: exact;
-          print-color-adjust: exact;
-        }
-        .main-content {
-          width: 100%;
-          padding: 0;
-        }
-        .profile-photo {
-          display: none;
-        }
-        .sidebar-title {
-          color: var(--primary-color);
-        }
-        .contact-info a {
-          color: var(--dark-color);
-        }
-        .skills-list li {
-          color: var(--text-color);
-        }
-        .header {
-          padding: 1rem;
-          margin: 0;
-          text-align: center;
-          background: var(--light-color);
-        }
-        h1 {
-          font-size: 2rem;
-        }
-        .title,
-        .degree {
-          color: var(--dark-color);
-        }
-        .section {
-          page-break-inside: avoid;
-        }
-        footer {
-          display: none;
-        }
-      }
-
-      /* Floating button style */
-      #downloadPdfBtn {
-        position: fixed;
-        bottom: 25px;
-        right: 25px;
-        background-color: var(--secondary-color);
-        color: white;
-        border: none;
-        border-radius: 50%;
-        width: 56px;
-        height: 56px;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        cursor: pointer;
-        font-size: 24px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-        transition: background-color 0.3s ease;
-      }
-      #downloadPdfBtn:hover {
-        background-color: #217dbb;
-      }
-
-      #downloadImageBtn {
-        background-color: #3498db;
-        margin-bottom: 10px;
-      }
-
-      #downloadImageBtn:hover, #downloadPdfBtn:hover {
-        transform: scale(1.1);
-      }
-
-      #downloadImageBtn:hover {
-        background-color: #2980b9;
-      }
-
-      #downloadPdfBtn:hover {
-        background-color: #c0392b;
-      }
-
-      .floating-buttons {
-        position: fixed;
-        bottom: 30px;
-        left: 30px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        z-index: 1000;
-      }
-
-      .download-options {
-        display: none;
-        flex-direction: column;
-        gap: 8px;
-        margin-bottom: 10px;
-        background: white;
-        padding: 10px;
-        border-radius: 8px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-      }
-
-      .download-options button {
-        padding: 8px 16px;
-        border: none;
-        border-radius: 4px;
-        background-color: #3498db;
-        color: white;
-        cursor: pointer;
-        transition: background-color 0.3s;
-      }
-
-      .download-options button:hover {
-        background-color: #2980b9;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <aside class="sidebar">
-        <img src="./me.jpg" alt="Photo de profil" class="profile-photo" />
-
-        <div class="sidebar-section contact-info">
-          <h3 class="sidebar-title">Contact</h3>
-          <a href="tel:+687805868"><i class="fas fa-phone"></i> +687 80 58 68</a>
-          <a href="mailto:sylvain.auger-leger@unc.nc"
-            ><i class="fas fa-envelope"></i> sylvain.auger-leger@unc.nc</a
-          >
-          <a href="https://github.com/tyvain" target="_blank"
-            ><i class="fab fa-github"></i> github.com/tyvain</a
-          >
-        </div>
-
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">Compétences</h3>
-          <ul class="skills-list">
-            <li>
-              <b>Gestion de Projet:</b> PMBOK, Itil, Prince2, Lean, Scrum,
-              Kanban
-            </li>
-            <li><b>DevOps:</b> GitLab CI/CD, Kubernetes</li>
-            <li><b>Développement:</b> Java, Spring, Spring Boot</li>
-            <li><b>Système:</b> Linux, Windows, Virtualisation</li>
-            <li><b>Soft Skills:</b> Autonomie, Service client, Rigueur,
-              Vulgarisation</li>
-          </ul>
-        </div>
-
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">Langues</h3>
-          <ul class="skills-list">
-            <li>Français (Natif)</li>
-            <li>Anglais (Courant)</li>
-          </ul>
-        </div>
-
-        <div class="sidebar-section">
-          <h3 class="sidebar-title">Sports</h3>
-          <ul class="skills-list">
-            <li>Natation, Surf, Wingfoil, Football</li>
-          </ul>
-        </div>
-      </aside>
-
-      <main class="main-content">
-        <header class="header">
-          <h1>Sylvain Auger-Léger</h1>
-          <h2 class="title">Chef de Projet Informatique - Urbaniste SI - DevOps</h2>
-          <div class="degree">Master's Degree in Software Engineering</div>
-        </header>
-
-        <section class="section">
-          <h2 class="section-title">
-            <i class="fas fa-briefcase"></i> Expérience Professionnelle
-          </h2>
-
-          <div class="experience-item">
-            <div class="job-title">
-              Chef de projet / Urbaniste SI / DevOps
-            </div>
-            <div class="company">Université de la Nouvelle-Calédonie</div>
-            <div class="date">2018 - à ce jour</div>
-            <ul class="tasks">
-              <li>
-                Pilotage de la mise en place d'un système d'aide à la décision (SID) complet.
-              </li>
-              <li>
-                Responsable de la mise en œuvre d'une usine logicielle moderne (GitLab CI/CD, Kubernetes).
-              </li>
-              <li>
-                Coordination des audits de sécurité et du plan d'action correctif (ANSSI).
-              </li>
-              <li>Contribution au développement de la maturité ITIL/ITSM.</li>
-              <li>Accompagnement et formation des équipes aux pratiques DevOps.</li>
-              <li>Support de niveau 3 technique et fonctionnel.</li>
-              <li>
-                Enseignement du cours "Gestion de Projets Informatiques et gouvernance IT".
-              </li>
-            </ul>
-          </div>
-          <div class="experience-item">
-            <div class="job-title">Responsable de la Division Fiscalité</div>
-            <div class="company">Direction du numérique (DINUM)</div>
-            <div class="date">2013 - 2018</div>
-            <ul class="tasks">
-              <li>Encadrement et animation d’une équipe de 8 ingénieurs.</li>
-              <li>
-                Pilotage stratégique du portefeuille de projets numériques liés à la fiscalité.
-              </li>
-              <li>Gestion de projets à fort impact national (portail de télédéclaration, etc.).</li>
-            </ul>
-          </div>
-          <div class="experience-item">
-            <div class="job-title">Ingénieur Développeur (Spring / Java)</div>
-            <div class="company">Multiples contextes (Service Public, Startups, Freelance)</div>
-            <div class="date">2007 - 2013</div>
-          </div>
-        </section>
-      </main>
+    }
+  </style>
+</head>
+<body>
+  <div class="cv-container">
+    <div class="cv-sidebar">
+      <img src="me.jpg" alt="Photo de Sylvain">
+      <h2>Sylvain Auger-Léger</h2>
+      <p>Chef de Projet Informatique</p>
+      <p>Urbaniste SI - DevOps</p>
+      <p>45 ans</p>
+      <p>Master en Génie Logiciel</p>
+      <div class="section-title">Contact</div>
+      <p>📞 +687 80 58 68</p>
+      <p>✉️ sylvain.auger-leger@unc.nc</p>
+      <div class="section-title">Soft Skills</div>
+      <ul>
+        <li>Autonomie</li>
+        <li>Rigueur</li>
+        <li>Vulgarisation</li>
+        <li>Esprit d'équipe</li>
+        <li>Anglais courant</li>
+      </ul>
     </div>
-
-    <!-- Floating download buttons -->
-    <div class="floating-buttons">
-      <button id="downloadImageBtn" title="Télécharger en image" aria-label="Télécharger en image">
-        <i class="fas fa-camera"></i>
-      </button>
-      <div class="download-options">
-        <button data-format="png">PNG</button>
-        <button data-format="jpeg">JPG</button>
+    <div class="cv-main">
+      <div class="section">
+        <div class="section-title">Résumé</div>
+        <p>
+          Chef de projet certifié ITIL avec plus de 15 ans d'expérience dans la transformation numérique, la gouvernance SI et la gestion de portefeuilles de projets transversaux. Spécialisé en DevOps, architecture décisionnelle et conduite du changement, j’interviens dans des environnements complexes en lien direct avec les équipes métier, les directions et les partenaires externes. Forte expérience dans l’enseignement supérieur et les services publics, avec un engagement marqué pour le numérique responsable et les approches centrées utilisateurs.
+        </p>
       </div>
-      <button id="downloadPdfBtn" title="Télécharger en PDF" aria-label="Télécharger en PDF">
-        <i class="fas fa-file-pdf"></i>
-      </button>
+      <div class="section">
+        <div class="section-title">Expérience professionnelle</div>
+        <div class="job">
+          <div class="job-title">Chef de projet / Urbaniste SI / DevOps <span class="job-period">2018 - à ce jour</span></div>
+          <div>Université de la Nouvelle-Calédonie</div>
+          <ul>
+            <li>Pilotage de la dématérialisation des inscriptions : coordination métier, intégration parcoursup/moonmaster, prestataires et partenaires publics</li>
+            <li>Pilotage d’un SID (architecture, ETL, univers, intégration utilisateurs)</li>
+            <li>Usine logicielle GitLab CI/CD + Kubernetes</li>
+            <li>Homologation ANSSI avec Ornisec</li>
+            <li>Mise en place ITIL/ITSM (documentation, support)</li>
+            <li>Projets DevOps avec le pôle Réseau</li>
+            <li>Formations sur outils et méthodes agiles</li>
+            <li>Support niveau 3 aux utilisateurs</li>
+            <li>Enseignement IT & Gouvernance (L3)</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-title">Responsable de la Division Fiscalité <span class="job-period">2013 - 2018</span></div>
+          <div>Direction du numérique (DINUM)</div>
+          <ul>
+            <li>Encadrement de 8 ingénieurs</li>
+            <li>Pilotage stratégique de projets fiscaux</li>
+            <li>Coordination interservices gouvernementaux</li>
+            <li>Portail fiscal, identifiant unique, dématérialisation</li>
+          </ul>
+        </div>
+        <div class="job">
+          <div class="job-title">Ingénieur Développeur (Spring / Java) <span class="job-period">2007 - 2013</span></div>
+          <div>Direction du numérique (DINUM)</div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Compétences techniques</div>
+        <div class="skills-columns">
+          <div>
+            <strong>Gestion de projet</strong>
+            <ul>
+              <li>PMBOK</li>
+              <li>ITIL (certifié)</li>
+              <li>Prince2</li>
+              <li>Lean</li>
+              <li>Scrum</li>
+              <li>Kanban</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Dev / DevOps / Cloud</strong>
+            <ul>
+              <li>Java</li>
+              <li>Spring / Spring Boot</li>
+              <li>GitLab CI/CD</li>
+              <li>Kubernetes</li>
+            </ul>
+          </div>
+          <div>
+            <strong>Administration systèmes</strong>
+            <ul>
+              <li>Linux / Ubuntu</li>
+              <li>Windows</li>
+              <li>KVM, VirtualBox</li>
+              <li>Supervision, sauvegardes</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="section">
+        <div class="section-title">Références</div>
+        <ul class="reference-list">
+          <li>Emmanuel Geze – Développeur – emmanuel.geze@unc.nc – +687 512213</li>
+          <li>Sylvain Michel – Chef de projet SI – sylvainmichelfr@gmail.com – +687 747356</li>
+          <li>Vincent Lavergne – Agence digitale NC – vincent@tealforge.com – +687 944363</li>
+        </ul>
+      </div>
     </div>
-
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        // Configuration pour le bouton d'image
-        const downloadImageBtn = document.getElementById('downloadImageBtn');
-        const downloadOptions = document.querySelector('.download-options');
-        const container = document.querySelector('.container');
-
-        // Afficher/cacher les options de téléchargement
-        downloadImageBtn.addEventListener('click', function(e) {
-          e.stopPropagation();
-          downloadOptions.style.display = downloadOptions.style.display === 'flex' ? 'none' : 'flex';
-        });
-
-        // Gestion du téléchargement d'image
-        downloadOptions.querySelectorAll('button').forEach(button => {
-          button.addEventListener('click', async function(e) {
-            e.stopPropagation();
-            const format = this.dataset.format;
-            
-            try {
-              // Masquer les boutons pendant la capture
-              const buttons = document.querySelectorAll('.floating-buttons button');
-              buttons.forEach(btn => {
-                btn.style.opacity = '0';
-              });
-              
-              console.log('Début de la capture...');
-              
-              // Options de capture
-              const options = {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                logging: true, // Activer les logs pour le débogage
-                backgroundColor: null,
-                onclone: function(clonedDoc) {
-                  console.log('Document cloné pour capture');
-                }
-              };
-              
-              console.log('Options de capture :', options);
-              
-              // Capturer le conteneur principal
-              const canvas = await html2canvas(container, options);
-              
-              if (!canvas) {
-                throw new Error('La capture a échoué : canvas non créé');
-              }
-              
-              console.log('Capture terminée, création du lien de téléchargement...');
-              
-              // Créer un lien de téléchargement
-              const link = document.createElement('a');
-              const fileName = `CV-Sylvain-Auger-Leger.${format}`;
-              link.download = fileName;
-              
-              // Convertir le canvas en URL de données
-              const dataUrl = canvas.toDataURL(`image/${format}`, 1.0);
-              if (!dataUrl || dataUrl === 'data:,') {
-                throw new Error('Échec de la conversion en image');
-              }
-              
-              link.href = dataUrl;
-              console.log('Lien de téléchargement créé pour :', fileName);
-              
-              // Déclencher le téléchargement
-              document.body.appendChild(link);
-              link.click();
-              document.body.removeChild(link);
-            } catch (error) {
-              console.error('Erreur détaillée :', {
-                message: error.message,
-                name: error.name,
-                stack: error.stack,
-                error: error
-              });
-              alert(`Erreur lors de la capture : ${error.message || 'Veuillez réessayer'}`);
-            } finally {
-              // Réafficher les boutons
-              document.querySelectorAll('.floating-buttons button').forEach(btn => {
-                btn.style.opacity = '1';
-              });
-              downloadOptions.style.display = 'none';
-            }
-          });
-        });
-
-        // Fermer les options quand on clique ailleurs
-        document.addEventListener('click', function() {
-          downloadOptions.style.display = 'none';
-        });
-
-        // Configuration pour le bouton PDF existant
-        const pdfButton = document.getElementById("downloadPdfBtn");
-        pdfButton.addEventListener("click", async () => {
-          try {
-            // Masquer les boutons pendant la capture
-            document.querySelectorAll('.floating-buttons button').forEach(btn => {
-              btn.style.opacity = '0';
-            });
-            
-            // Utilisation d'html2canvas pour capturer la page
-            const canvas = await html2canvas(container, {
-              scale: 2,
-              useCORS: true,
-              allowTaint: true,
-              logging: false,
-              backgroundColor: null
-            });
-            
-            const imgData = canvas.toDataURL("image/png");
-            const { jsPDF } = window.jspdf;
-            const pdf = new jsPDF({
-              unit: "mm",
-              format: "a4",
-            });
-
-            const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-            pdf.addImage(imgData, "PNG", 0, 0, pdfWidth, pdfHeight);
-            pdf.save("CV_Sylvain_Auger-Leger.pdf");
-          } catch (error) {
-            console.error('Erreur lors de la génération du PDF :', error);
-            alert('Une erreur est survenue lors de la génération du PDF.');
-          } finally {
-            // Réafficher les boutons
-            document.querySelectorAll('.floating-buttons button').forEach(btn => {
-              btn.style.opacity = '1';
-            });
-          }
-        });
-      });
-    </script>
+  </div>
 </body>
 </html>
