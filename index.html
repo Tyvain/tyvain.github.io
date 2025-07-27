@@ -6,13 +6,7 @@
   <title>Sylvain Auger-Léger - CV</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       font-family: 'Open Sans', sans-serif;
       background: #ffffff;
@@ -23,7 +17,6 @@
       height: 100%;
       overflow: hidden;
     }
-
     .cv-container {
       display: flex;
       width: 100%;
@@ -33,7 +26,6 @@
       gap: 20px;
       overflow: hidden;
     }
-
     .cv-sidebar {
       flex: 0 0 240px;
       background: #1a1a1a;
@@ -43,7 +35,6 @@
       flex-direction: column;
       align-items: center;
     }
-
     .cv-sidebar img {
       border-radius: 50%;
       width: 90px;
@@ -51,19 +42,16 @@
       object-fit: cover;
       margin-bottom: 15px;
     }
-
     .cv-sidebar h2 {
       font-size: 16px;
       margin-bottom: 5px;
       text-align: center;
     }
-
     .cv-sidebar p {
       font-size: 11px;
       margin: 3px 0;
       text-align: center;
     }
-
     .cv-sidebar .section-title {
       font-size: 12px;
       color: #4a90e2;
@@ -74,16 +62,11 @@
       text-align: left;
       padding-bottom: 2px;
     }
-
     .cv-main {
       flex: 1;
       overflow: hidden;
     }
-
-    .section {
-      margin-bottom: 15px;
-    }
-
+    .section { margin-bottom: 15px; }
     .section-title {
       font-size: 14px;
       font-weight: 600;
@@ -92,51 +75,35 @@
       border-bottom: 1px solid #ccc;
       padding-bottom: 2px;
     }
-
-    .job {
-      margin-bottom: 10px;
-    }
-
-    .job-title {
-      font-weight: 600;
-    }
-
+    .job { margin-bottom: 10px; }
+    .job-title { font-weight: 600; }
     .job-period {
       float: right;
       font-style: italic;
       font-weight: 400;
       color: #777;
     }
-
     ul {
       padding-left: 20px;
       margin: 3px 0 8px 0;
       font-size: 11px;
     }
-
     .skills-columns {
       display: flex;
       flex-wrap: wrap;
       gap: 20px;
       font-size: 11px;
     }
-
     .skills-columns ul {
       list-style: square;
       padding-left: 15px;
     }
-
     .reference-list {
       list-style: none;
       font-size: 11px;
       padding-left: 0;
     }
-
-    @page {
-      size: A4;
-      margin: 0;
-    }
-
+    @page { size: A4; margin: 0; }
     @media print {
       html, body {
         width: 210mm;
@@ -146,7 +113,6 @@
         -webkit-print-color-adjust: exact;
         overflow: hidden;
       }
-
       .cv-container {
         width: 100%;
         height: 100vh;
@@ -158,7 +124,6 @@
         page-break-inside: avoid;
         overflow: hidden;
       }
-
       .cv-sidebar, .cv-main {
         padding: 10mm;
       }
@@ -190,7 +155,7 @@
       <div class="section">
         <div class="section-title">Résumé</div>
         <p>
-          Chef de projet certifié ITIL avec plus de 15 ans d'expérience dans la transformation numérique, la gouvernance SI et la gestion de portefeuilles de projets transversaux. Spécialisé en DevOps, architecture décisionnelle et conduite du changement, j’interviens dans des environnements complexes en lien direct avec les équipes métier, les directions et les partenaires externes. Forte expérience dans l’enseignement supérieur et les services publics, avec un engagement marqué pour le numérique responsable et les approches centrées utilisateurs.
+          Chef de projet senior certifié ITIL avec plus de 15 ans d'expérience en pilotage stratégique de projets informatiques complexes, en gestion de portefeuilles transversaux et en mise en œuvre de solutions numériques à fort impact. Spécialiste DevOps, SI décisionnels et gouvernance IT, j’ai conduit plusieurs projets de dématérialisation, d’intégration de services publics (Parcoursup, Moonmaster) et de modernisation technique (Kubernetes, CI/CD). Expérience éprouvée dans la gestion de partenaires externes, l'encadrement d’équipes pluridisciplinaires, et la collaboration étroite avec les directions métiers, dans des environnements multiculturels et institutionnels. Engagé pour une transformation numérique durable, centrée utilisateur et orientée résultats.
         </p>
       </div>
       <div class="section">
@@ -200,14 +165,13 @@
           <div>Université de la Nouvelle-Calédonie</div>
           <ul>
             <li>Pilotage de la dématérialisation des inscriptions : coordination métier, intégration parcoursup/moonmaster, prestataires et partenaires publics</li>
-            <li>Pilotage d’un SID (architecture, ETL, univers, intégration utilisateurs)</li>
-            <li>Usine logicielle GitLab CI/CD + Kubernetes</li>
-            <li>Homologation ANSSI avec Ornisec</li>
-            <li>Mise en place ITIL/ITSM (documentation, support)</li>
-            <li>Projets DevOps avec le pôle Réseau</li>
+            <li>Pilotage de la mise en place d'un SID (architecture, ETL, univers, intégration utilisateurs)</li>
+            <li>Pilotage de la mise en place de l'sine logicielle GitLab CI/CD + Kubernetes</li>
+            <li>ITIL/ITSM (documentation, support)</li>
+            <li>Coach DevOps (accompagnement aux meilleures pratiques DevOps)</li>
             <li>Formations sur outils et méthodes agiles</li>
             <li>Support niveau 3 aux utilisateurs</li>
-            <li>Enseignement IT & Gouvernance (L3)</li>
+            <li>Enseignement gestion de projet IT & gouvernance</li>
           </ul>
         </div>
         <div class="job">
@@ -231,7 +195,7 @@
           <div>
             <strong>Gestion de projet</strong>
             <ul>
-              <li>PMBOK</li>
+              <li>PMP</li>
               <li>ITIL (certifié)</li>
               <li>Prince2</li>
               <li>Lean</li>
@@ -249,12 +213,13 @@
             </ul>
           </div>
           <div>
-            <strong>Administration systèmes</strong>
+            <strong>Transformation numérique</strong>
             <ul>
-              <li>Linux / Ubuntu</li>
-              <li>Windows</li>
-              <li>KVM, VirtualBox</li>
-              <li>Supervision, sauvegardes</li>
+              <li>Conduite du changement</li>
+              <li>Dématérialisation des services</li>
+              <li>Intégration de plateformes publiques (Parcoursup, Moonmaster)</li>
+              <li>Gouvernance IT et architecture SI</li>
+              <li>Conception centrée utilisateur</li>
             </ul>
           </div>
         </div>
