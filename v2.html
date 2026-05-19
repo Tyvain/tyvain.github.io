@@ -1,0 +1,667 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COVOIT.NC x ACE - V2</title>
+  <style>
+    :root {
+      --ink: #14201c;
+      --muted: #64736d;
+      --paper: #f7f4ed;
+      --white: #fffdf8;
+      --line: #ded8ca;
+      --green: #1f8f5f;
+      --deep: #0c2f28;
+      --blue: #176c8f;
+      --yellow: #f0b546;
+      --red: #d95f4c;
+      --soft-green: #dfeee4;
+      --soft-blue: #dbeaf0;
+      --shadow: 0 24px 70px rgba(20, 32, 28, 0.14);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: var(--deep); color: var(--ink); }
+    body { overflow: hidden; }
+    button { font: inherit; }
+
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: var(--deep); }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: clamp(28px, 4.4vw, 62px);
+      background: var(--paper);
+      overflow: hidden;
+    }
+    .slide.active { display: grid; }
+    .slide.dark {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(240, 181, 70, 0.16), transparent 34%),
+        linear-gradient(135deg, #09241f 0%, #0d3d33 58%, #11352f 100%);
+    }
+    .slide.light-blue { background: linear-gradient(135deg, #f8f5ee 0%, #edf6f7 100%); }
+    .slide.light-green { background: linear-gradient(135deg, #fbf6ea 0%, #e8f3e8 100%); }
+    .slide.center { place-items: center; text-align: center; }
+    .slide.stack { grid-template-rows: auto minmax(0, 1fr); gap: clamp(20px, 3vw, 34px); }
+    .slide.split { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.95fr); gap: clamp(28px, 4vw, 58px); align-items: center; }
+    .stage { position: relative; z-index: 1; width: 100%; max-width: 1220px; margin: 0 auto; }
+    .full { max-width: 1320px; }
+    .narrow { max-width: 980px; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: clamp(11px, 1.08vw, 14px);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .kicker::before { content: ""; width: 26px; height: 3px; background: currentColor; border-radius: 99px; }
+    .dark .kicker { color: #91e5b5; }
+
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.02; letter-spacing: 0; }
+    h1 { max-width: 1060px; font-size: clamp(52px, 8vw, 112px); font-weight: 930; }
+    .hero h1 { max-width: 780px; font-size: clamp(46px, 6.4vw, 88px); }
+    h2 { max-width: 1100px; font-size: clamp(35px, 5.1vw, 70px); font-weight: 910; }
+    h3 { font-size: clamp(20px, 2.1vw, 29px); font-weight: 860; }
+    p { font-size: clamp(16px, 1.55vw, 22px); line-height: 1.38; }
+    .lead { margin-top: 22px; max-width: 920px; color: var(--muted); font-size: clamp(21px, 2.35vw, 33px); line-height: 1.22; }
+    .dark .lead, .dark .muted { color: rgba(255, 253, 248, 0.74); }
+    .muted { color: var(--muted); }
+    .small { font-size: clamp(13px, 1.18vw, 16px); line-height: 1.45; }
+    .tiny { font-size: clamp(10px, 0.9vw, 12px); line-height: 1.35; }
+
+    .grid { display: grid; gap: clamp(14px, 1.7vw, 22px); }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card, .panel, .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.9);
+      box-shadow: var(--shadow);
+    }
+    .card, .panel { padding: clamp(18px, 2.2vw, 30px); }
+    .metric { padding: clamp(18px, 2vw, 26px); }
+    .dark .card, .dark .panel, .dark .metric {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.22);
+    }
+    .metric strong {
+      display: block;
+      color: var(--deep);
+      font-size: clamp(38px, 5vw, 66px);
+      line-height: 0.94;
+      font-weight: 930;
+    }
+    .dark .metric strong { color: var(--white); }
+    .metric span { display: block; margin-top: 10px; color: var(--muted); font-size: clamp(13px, 1.18vw, 17px); line-height: 1.35; }
+    .dark .metric span { color: rgba(255, 253, 248, 0.72); }
+
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(340px, 0.72fr);
+      align-items: center;
+      gap: clamp(28px, 4vw, 62px);
+    }
+    .hero-map {
+      position: relative;
+      min-height: min(72vh, 620px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.07);
+      overflow: hidden;
+    }
+    .hero-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .floating-stat {
+      position: absolute;
+      min-width: 165px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: var(--radius);
+      background: rgba(255, 255, 255, 0.13);
+      backdrop-filter: blur(12px);
+    }
+    .floating-stat strong { display: block; font-size: clamp(27px, 3.4vw, 45px); line-height: 1; }
+    .floating-stat span { display: block; margin-top: 7px; color: rgba(255, 253, 248, 0.74); font-size: 13px; line-height: 1.25; }
+    .stat-a { top: 8%; left: 8%; }
+    .stat-b { top: 39%; right: 8%; }
+    .stat-c { bottom: 10%; left: 12%; }
+
+    .bars { display: grid; gap: 15px; margin-top: 22px; }
+    .bar { display: grid; grid-template-columns: 165px 1fr 90px; gap: 14px; align-items: center; color: var(--muted); font-size: 14px; }
+    .bar-track { height: 15px; border-radius: 999px; background: #ebe5d8; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--green), var(--blue)); }
+    .dark .bar-track { background: rgba(255,255,255,0.12); }
+    .bar strong { color: var(--ink); font-size: 16px; }
+    .dark .bar strong { color: var(--white); }
+
+    .line-chart {
+      position: relative;
+      min-height: 380px;
+      border-left: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      margin-top: 20px;
+      padding: 18px 0 34px 0;
+    }
+    .line-chart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .axis-labels { position: absolute; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); color: var(--muted); font-size: 12px; }
+    .callout {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--soft-green);
+      color: var(--deep);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .donut-wrap { display: grid; grid-template-columns: minmax(260px, 0.78fr) minmax(0, 1.22fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .donut {
+      width: min(100%, 390px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0 91deg, var(--blue) 91deg 200deg, var(--yellow) 200deg 305deg, var(--red) 305deg 342deg, #8ca096 342deg 360deg);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+    .donut-inner {
+      display: grid;
+      place-items: center;
+      width: 64%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--paper);
+      text-align: center;
+      padding: 20px;
+    }
+    .donut-inner strong { display: block; color: var(--deep); font-size: clamp(38px, 5vw, 64px); line-height: 0.92; }
+    .budget-line {
+      display: grid;
+      grid-template-columns: 14px 1fr auto;
+      gap: 13px;
+      align-items: center;
+      padding: 15px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .budget-line:last-child { border-bottom: 0; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .dot.yellow { background: var(--yellow); }
+    .dot.red { background: var(--red); }
+    .dot.gray { background: #8ca096; }
+
+    .timeline {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+      margin-top: 12px;
+    }
+    .timeline::before { content: ""; position: absolute; top: 42px; left: 7%; right: 7%; height: 3px; background: linear-gradient(90deg, var(--blue), var(--green), var(--yellow)); }
+    .moment { position: relative; padding-top: 82px; }
+    .moment::before {
+      content: "";
+      position: absolute;
+      top: 29px;
+      left: 24px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--green);
+      border: 7px solid var(--paper);
+      box-shadow: 0 12px 30px rgba(20, 32, 28, 0.16);
+    }
+    .moment strong { display: block; color: var(--deep); font-size: clamp(30px, 4vw, 54px); line-height: 0.95; }
+
+    .flow { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 12px; align-items: stretch; }
+    .step {
+      position: relative;
+      min-height: 170px;
+      padding: 18px;
+      border-radius: var(--radius);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+    }
+    .step::after {
+      content: "";
+      position: absolute;
+      right: -11px;
+      top: 50%;
+      width: 18px;
+      height: 2px;
+      background: var(--green);
+    }
+    .step:last-child::after { display: none; }
+    .step strong { display: block; margin-bottom: 10px; color: var(--green); font-size: 28px; }
+
+    .source {
+      position: absolute;
+      left: clamp(28px, 4.4vw, 62px);
+      right: clamp(120px, 12vw, 180px);
+      bottom: 17px;
+      z-index: 3;
+      color: rgba(20, 32, 28, 0.5);
+      font-size: 11px;
+      line-height: 1.32;
+    }
+    .dark .source { color: rgba(255, 253, 248, 0.46); }
+
+    .nav {
+      position: fixed;
+      right: 22px;
+      bottom: 18px;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      background: rgba(9, 36, 31, 0.74);
+      color: white;
+      box-shadow: 0 12px 42px rgba(0,0,0,0.24);
+      backdrop-filter: blur(12px);
+    }
+    .nav button {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      cursor: pointer;
+    }
+    .counter { min-width: 58px; text-align: center; font-size: 13px; font-weight: 780; }
+    .progress { position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; height: 4px; background: rgba(255,255,255,0.13); }
+    .progress span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--green), var(--blue), var(--yellow)); transition: width 180ms ease; }
+
+    @media (max-width: 880px) {
+      body { overflow: auto; }
+      .deck { height: auto; min-height: 100vh; overflow: visible; }
+      .slide { position: relative; min-height: 100vh; display: none; padding-bottom: 82px; }
+      .slide.active { display: grid; }
+      .slide.split, .hero, .donut-wrap { grid-template-columns: 1fr; }
+      .three, .four, .flow, .timeline { grid-template-columns: 1fr; }
+      .bar { grid-template-columns: 110px 1fr 70px; }
+      .source { right: 28px; }
+      .timeline::before, .step::after { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="deck" aria-label="Présentation COVOIT.NC x ACE V2">
+    <section class="slide dark active" data-title="Ouverture">
+      <div class="stage hero">
+        <div>
+          <p class="kicker">COVOIT.NC x ACE</p>
+          <h1>Transformer les sièges vides en service public.</h1>
+          <p class="lead">La plateforme existe. Cette présentation V2 défend les moyens nécessaires pour en faire un usage réel, mesuré, animé et durable sur 12 mois.</p>
+        </div>
+        <div class="hero-map" aria-label="Carte stylisée des axes de covoiturage">
+          <svg viewBox="0 0 620 640" role="img">
+            <path d="M105 84 C202 122 279 198 356 286 C434 375 506 443 568 529 C590 561 577 604 536 617 C423 650 288 559 194 462 C97 361 38 220 63 126 C70 101 84 89 105 84 Z" fill="rgba(145,229,181,.22)" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+            <path d="M121 143 C223 194 292 270 360 338 C430 407 485 466 546 553" fill="none" stroke="#f7f4ed" stroke-width="16" stroke-linecap="round" opacity=".54"/>
+            <path d="M121 143 C223 194 292 270 360 338 C430 407 485 466 546 553" fill="none" stroke="#91e5b5" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"/>
+            <path d="M167 457 C254 423 339 432 414 486" fill="none" stroke="#f0b546" stroke-width="6" stroke-linecap="round"/>
+            <path d="M216 212 C254 293 275 370 303 469" fill="none" stroke="#6bb9d2" stroke-width="6" stroke-linecap="round"/>
+            <g fill="#fffdf8" stroke="#0c2f28" stroke-width="5">
+              <circle cx="121" cy="143" r="13"/><circle cx="216" cy="212" r="13"/><circle cx="303" cy="469" r="13"/><circle cx="414" cy="486" r="13"/><circle cx="546" cy="553" r="13"/>
+            </g>
+          </svg>
+          <div class="floating-stat stat-a"><strong>80%</strong><span>des actifs calédoniens privilégient la voiture</span></div>
+          <div class="floating-stat stat-b"><strong>20k</strong><span>navettes périphérie vers Nouméa</span></div>
+          <div class="floating-stat stat-c"><strong>12 mois</strong><span>pour prouver l'usage, pas seulement l'outil</span></div>
+        </div>
+      </div>
+      <p class="source">Sources clés utilisées : ISEE Nouvelle-Calédonie, Ministère de la Transition écologique, Observatoire national du covoiturage, BlaBlaCar Newsroom, GoodFirms.</p>
+    </section>
+
+    <section class="slide split light-blue" data-title="Le problème">
+      <div class="stage">
+        <p class="kicker">Constat local</p>
+        <h2>Le sujet n'est pas l'envie de covoiturer. C'est la création d'une habitude fiable.</h2>
+        <p class="lead">En Nouvelle-Calédonie, les distances domicile-travail se sont allongées, l'emploi est concentré et la voiture reste le mode dominant. Le covoiturage doit donc être traité comme un service à exploiter, pas comme une page web à publier.</p>
+      </div>
+      <div class="panel">
+        <div class="bars">
+          <div class="bar"><span>Voiture chez les actifs</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><strong>80%</strong></div>
+          <div class="bar"><span>Actifs hors commune</span><div class="bar-track"><div class="bar-fill" style="width:33%"></div></div><strong>1/3</strong></div>
+          <div class="bar"><span>Grand Nouméa vers capitale</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div><strong>20k</strong></div>
+          <div class="bar"><span>Païta/Dumbéa/Mont-Dore</span><div class="bar-track"><div class="bar-fill" style="width:55%"></div></div><strong>&gt;50%</strong></div>
+        </div>
+      </div>
+      <p class="source">ISEE, “Bassins d'emploi et déplacements domicile-travail en Nouvelle-Calédonie”, recensement 2019.</p>
+    </section>
+
+    <section class="slide stack" data-title="Pourquoi maintenant">
+      <div class="stage full">
+        <p class="kicker">Fenêtre d'action</p>
+        <h2>Le covoiturage devient une politique publique mesurable.</h2>
+      </div>
+      <div class="stage full grid three">
+        <div class="metric"><strong>12M/an</strong><span>trajets par plateformes en France en 2024, environ 1 million par mois.</span></div>
+        <div class="metric"><strong>3M/jour</strong><span>objectif national de trajets quotidiens d'ici 2027.</span></div>
+        <div class="metric"><strong>3 Mt</strong><span>CO2 évitable par an si l'objectif est atteint, selon les évaluations publiques.</span></div>
+      </div>
+      <div class="stage full panel">
+        <p>Lecture pour l'ACE : les financeurs publics ne soutiennent plus seulement des “apps”. Ils financent des dispositifs complets : animation, incitation, preuve de trajet, lutte contre la fraude, reporting et amélioration continue.</p>
+      </div>
+      <p class="source">Ministère de la Transition écologique, page “Covoiturage : informations à connaître”, chiffres clés 2024 et objectif 2027.</p>
+    </section>
+
+    <section class="slide split dark" data-title="Benchmark BlaBlaCar">
+      <div class="stage">
+        <p class="kicker">Benchmark</p>
+        <h2>BlaBlaCar prouve que le covoiturage est une industrie d'exploitation, pas un simple formulaire.</h2>
+        <p class="lead">Leur échelle montre pourquoi un projet local crédible doit financer le produit, mais aussi l'équipe, l'animation, la confiance, la donnée et les partenariats.</p>
+      </div>
+      <div class="grid two">
+        <div class="metric"><strong>800</strong><span>salariés, 50 nationalités.</span></div>
+        <div class="metric"><strong>21</strong><span>pays couverts.</span></div>
+        <div class="metric"><strong>100M</strong><span>passagers covoiturage et bus en 2024.</span></div>
+        <div class="metric"><strong>2,5 Mt</strong><span>CO2 évitées en 2024.</span></div>
+      </div>
+      <p class="source">BlaBlaCar Newsroom, “About us” et Sustainability Report 2024 : 800 employees, 21 countries, 100M passengers, 2.5M tonnes CO2 avoided.</p>
+    </section>
+
+    <section class="slide split light-blue" data-title="Coût d'une app">
+      <div class="stage">
+        <p class="kicker">Dimensionnement économique</p>
+        <h2>Une app type BlaBlaCar est une marketplace, pas un site.</h2>
+        <p class="lead">Même à l'échelle locale, COVOIT.NC porte des briques coûteuses : profils, matching, messagerie, preuve de trajet, admin, modération, reporting et sécurité.</p>
+      </div>
+      <div class="grid two">
+        <div class="metric"><strong>5-20M</strong><span>F CFP pour une app complexe à 50k-200k USD+.</span></div>
+        <div class="metric"><strong>3-10M</strong><span>F CFP pour un MVP rideshare à 30k-100k USD.</span></div>
+        <div class="metric"><strong>253M€</strong><span>revenus BlaBlaCar en 2023.</span></div>
+        <div class="metric"><strong>100M€</strong><span>financement annoncé en avril 2024.</span></div>
+      </div>
+      <p class="source">GoodFirms : app complexe 50k-200k USD+ ; NewAgeSysIT : rideshare MVP 30k/60k/100k USD ; conversion indicative mai 2026 : 1 USD ≈ 102 F CFP. BlaBlaCar Newsroom : revenus 2023 et financement 2024.</p>
+    </section>
+
+    <section class="slide split light-green" data-title="Ordre de grandeur">
+      <div class="stage">
+        <p class="kicker">Effet d'échelle</p>
+        <h2>La valeur naît quand l'offre, la demande et la confiance montent ensemble.</h2>
+        <p class="lead">BlaBlaCar a évité 2,5 millions de tonnes de CO2 en remplissant plus de 70 millions de sièges vides en 2024. COVOIT.NC n'a pas besoin de copier cette taille : il doit copier la logique d'exploitation.</p>
+      </div>
+      <div class="panel">
+        <div class="line-chart" aria-label="Progression schématique des preuves d'impact">
+          <svg viewBox="0 0 640 380" preserveAspectRatio="none">
+            <line x1="0" y1="92" x2="640" y2="92" stroke="#ded8ca" stroke-width="1"/>
+            <line x1="0" y1="184" x2="640" y2="184" stroke="#ded8ca" stroke-width="1"/>
+            <line x1="0" y1="276" x2="640" y2="276" stroke="#ded8ca" stroke-width="1"/>
+            <polyline points="35,315 208,260 396,158 610,60" fill="none" stroke="#1f8f5f" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+            <g fill="#fffdf8" stroke="#1f8f5f" stroke-width="5">
+              <circle cx="35" cy="315" r="10"/><circle cx="208" cy="260" r="10"/><circle cx="396" cy="158" r="10"/><circle cx="610" cy="60" r="10"/>
+            </g>
+          </svg>
+          <div class="axis-labels"><span>Bêta</span><span>Activation</span><span>Récurrence</span><span>Impact</span></div>
+        </div>
+        <span class="callout">Plus de sièges remplis = moins de coût, moins de CO2, plus de résilience</span>
+      </div>
+      <p class="source">BlaBlaCar Sustainability Report 2024 : plus de 70M de sièges vides remplis, 2,5 Mt CO2 évitées, 540M EUR économisés par les conducteurs.</p>
+    </section>
+
+    <section class="slide stack dark" data-title="Bêta COVOIT.NC">
+      <div class="stage full">
+        <p class="kicker">Point de départ</p>
+        <h2>La bêta a créé l'offre. Le financement doit créer les trajets validés.</h2>
+      </div>
+      <div class="stage full grid four">
+        <div class="metric"><strong>20</strong><span>utilisateurs inscrits.</span></div>
+        <div class="metric"><strong>252</strong><span>trajets proposés.</span></div>
+        <div class="metric"><strong>13</strong><span>lignes récurrentes actives.</span></div>
+        <div class="metric"><strong>0</strong><span>trajet validé : c'est le verrou à financer.</span></div>
+      </div>
+      <div class="stage full panel">
+        <p>Le signal est clair : l'objet technique existe, mais le passage à l'usage exige de l'accompagnement terrain, des relances, des partenaires pilotes, des preuves de confiance et du reporting.</p>
+      </div>
+      <p class="source">Données COVOIT.NC issues de la V1, consultées le 19/05/2026.</p>
+    </section>
+
+    <section class="slide stack light-blue" data-title="Stratégie">
+      <div class="stage full">
+        <p class="kicker">Stratégie de déploiement</p>
+        <h2>Passer d'un outil disponible à un service opéré.</h2>
+      </div>
+      <div class="stage full flow">
+        <div class="step"><strong>1</strong><h3>Recruter</h3><p class="small muted">Campus, employeurs, communes, associations, événements.</p></div>
+        <div class="step"><strong>2</strong><h3>Rassurer</h3><p class="small muted">Profils, avis, modération, règles de partage des frais.</p></div>
+        <div class="step"><strong>3</strong><h3>Faire matcher</h3><p class="small muted">Lignes, horaires, trajets récurrents, relances ciblées.</p></div>
+        <div class="step"><strong>4</strong><h3>Valider</h3><p class="small muted">Preuve de trajet, code d'embarquement, historique.</p></div>
+        <div class="step"><strong>5</strong><h3>Mesurer</h3><p class="small muted">Km, CO2, économies, axes, cohortes et bilan ACE.</p></div>
+      </div>
+    </section>
+
+    <section class="slide split" data-title="Publics pilotes">
+      <div class="stage">
+        <p class="kicker">Activation territoriale</p>
+        <h2>Cinq bassins pilotes valent mieux qu'une campagne générale.</h2>
+        <p class="lead">Le covoiturage démarre dans des cercles de confiance. La présentation concentre les moyens là où les trajets sont réguliers et les groupes déjà structurés.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Campus et formation</h3><p class="small muted">Jeunes, horaires réguliers, budget transport sensible.</p></div>
+        <div class="card"><h3>Employeurs de plus de 50 salariés</h3><p class="small muted">Plan mobilité, équipes, parkings, communication interne.</p></div>
+        <div class="card"><h3>Communes périphériques</h3><p class="small muted">Païta, Dumbéa, Mont-Dore, Tontouta, axes vers Nouméa.</p></div>
+        <div class="card"><h3>Associations et événements</h3><p class="small muted">Confiance sociale, trajets ponctuels, ambassadeurs locaux.</p></div>
+      </div>
+      <p class="source">Appui local : ISEE sur les navettes domicile-travail ; ministère sur le rôle des employeurs, collectivités et lignes de covoiturage.</p>
+    </section>
+
+    <section class="slide split light-green" data-title="Confiance">
+      <div class="stage">
+        <p class="kicker">Confiance</p>
+        <h2>La sécurité est une fonctionnalité d'adoption.</h2>
+        <p class="lead">Les trajets validés ne décollent pas seulement avec plus d'inscrits. Ils décollent quand le passager sait qui vient, combien il paie, comment il annule et quoi faire si le trajet se passe mal.</p>
+      </div>
+      <div class="grid two">
+        <div class="card"><h3>Identité et profils</h3><p class="small muted">Téléphone, email, avis, favoris, blocage et signalement.</p></div>
+        <div class="card"><h3>Trajet encadré</h3><p class="small muted">Réservation, code d'embarquement, historique, preuve de trajet.</p></div>
+        <div class="card"><h3>Prix transparent</h3><p class="small muted">Partage des frais, plafond anti-profit, arrondi lisible.</p></div>
+        <div class="card"><h3>Modération</h3><p class="small muted">Messages sensibles, incidents, support et règles RGPD.</p></div>
+      </div>
+    </section>
+
+    <section class="slide stack light-blue" data-title="Contribution">
+      <div class="stage full">
+        <p class="kicker">Partage des frais</p>
+        <h2>Le prix doit être transparent, conseillé et borné.</h2>
+      </div>
+      <div class="stage full grid two">
+        <div class="panel">
+          <h3>Ce que l'app calcule</h3>
+          <p class="small muted">Distance réelle, consommation, carburant ou électricité, nombre de places, coût d'usage et arrondi lisible. L'objectif est de partager les frais, pas de créer un revenu conducteur.</p>
+          <div class="bars">
+            <div class="bar"><span>Distance</span><div class="bar-track"><div class="bar-fill" style="width:62%"></div></div><strong>24 km</strong></div>
+            <div class="bar"><span>Coût total</span><div class="bar-track"><div class="bar-fill" style="width:80%"></div></div><strong>641 F</strong></div>
+            <div class="bar"><span>Conseillé</span><div class="bar-track"><div class="bar-fill" style="width:38%"></div></div><strong>200 F</strong></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3>Garantir un covoiturage non lucratif</h3>
+          <p class="small muted">Le financement permet d'encadrer le prix : calcul local, plafond anti-profit, explication simple pour l'utilisateur et suivi des économies. Objectif : partager les frais, pas rémunérer un transport.</p>
+          <div class="grid two" style="margin-top:18px">
+            <div class="metric"><strong>0%</strong><span>commission commerciale proposée.</span></div>
+            <div class="metric"><strong>50 F</strong><span>arrondi simple pour l'usage.</span></div>
+          </div>
+        </div>
+      </div>
+      <p class="source">Reprise améliorée de la V1 : ContributionPricingService, prix carburants NC et logique de partage des frais avec plafond anti-profit.</p>
+    </section>
+
+    <section class="slide stack" data-title="Objectifs 12 mois">
+      <div class="stage full">
+        <p class="kicker">Objectifs mesurables</p>
+        <h2>Une demande plus forte doit produire des indicateurs plus exigeants.</h2>
+      </div>
+      <div class="stage full grid four">
+        <div class="metric"><strong>1 000</strong><span>inscrits qualifiés à 12 mois.</span></div>
+        <div class="metric"><strong>250</strong><span>conducteurs actifs recrutés.</span></div>
+        <div class="metric"><strong>40</strong><span>lignes ou axes récurrents suivis.</span></div>
+        <div class="metric"><strong>1 500</strong><span>trajets validés sur l'exercice pilote.</span></div>
+      </div>
+      <div class="stage full panel">
+        <p>Ces objectifs sont volontairement opérationnels : ils mesurent la bascule vers l'usage, pas seulement la communication. Ils pourront être ajustés au trimestre 2 selon les bassins pilotes réellement engagés.</p>
+      </div>
+    </section>
+
+    <section class="slide split dark" data-title="Dimensionnement">
+      <div class="stage">
+        <p class="kicker">Dimensionnement</p>
+        <h2>Demander 250 000 F CFP finance des frais. Demander 4,75 M F CFP finance un pilote.</h2>
+        <p class="lead">L'ordre de grandeur reste très inférieur au coût d'une app de marché complète, mais il couvre enfin les postes qui déclenchent l'usage : humain, produit, exploitation et preuve d'impact.</p>
+      </div>
+      <div class="grid two">
+        <div class="metric"><strong>0,35 ETP</strong><span>coordination partenariats, reporting, animation.</span></div>
+        <div class="metric"><strong>0,25 ETP</strong><span>support, modération, sécurité d'usage.</span></div>
+        <div class="metric"><strong>10-15</strong><span>ambassadeurs relais sur bassins pilotes.</span></div>
+        <div class="metric"><strong>2</strong><span>rapports trimestriels livrés à l'ACE.</span></div>
+      </div>
+    </section>
+
+    <section class="slide stack light-blue" data-title="Budget demandé">
+      <div class="stage full">
+        <p class="kicker">Budget 12 mois</p>
+        <h2>Un budget réaliste de pilote exploité : 4,75 M F CFP.</h2>
+      </div>
+      <div class="stage full donut-wrap">
+        <div class="donut" aria-label="Répartition budget demandé">
+          <div class="donut-inner"><strong>4,75M</strong><span class="small muted">F CFP sur 12 mois</span></div>
+        </div>
+        <div class="panel">
+          <div class="budget-line"><span class="dot"></span><div><h3>Développement produit</h3><p class="small muted">Améliorations app, preuve de trajet, calcul prix, dashboard, exports, sécurité, RGPD.</p></div><strong>1,82 M</strong></div>
+          <div class="budget-line"><span class="dot blue"></span><div><h3>Animation terrain</h3><p class="small muted">Campagnes pilotes ciblées, supports simples, ateliers, relais volontaires.</p></div><strong>0,87 M</strong></div>
+          <div class="budget-line"><span class="dot yellow"></span><div><h3>Exploitation technique</h3><p class="small muted">Hébergement, sauvegardes, monitoring, messagerie, maintenance.</p></div><strong>1,14 M</strong></div>
+          <div class="budget-line"><span class="dot red"></span><div><h3>Support et modération</h3><p class="small muted">Accompagnement utilisateurs, incidents, qualité des trajets.</p></div><strong>0,58 M</strong></div>
+          <div class="budget-line"><span class="dot gray"></span><div><h3>Administration et assurances</h3><p class="small muted">Assurance, comptabilité, frais bancaires, obligations associatives.</p></div><strong>0,34 M</strong></div>
+        </div>
+      </div>
+      <p class="source">Budget de présentation V2 proposé à partir des postes de la V1, rehaussé pour couvrir exploitation, activation et reporting d'un pilote annuel.</p>
+    </section>
+
+    <section class="slide stack" data-title="Échéancier">
+      <div class="stage full">
+        <p class="kicker">Échéancier macro</p>
+        <h2>Quatre séquences, chacune avec une preuve livrable.</h2>
+      </div>
+      <div class="stage full timeline">
+        <div class="card moment"><strong>M0-M2</strong><h3>Préparer</h3><p class="small muted">Convention ACE, gouvernance, tableau de bord, kit partenaires, parcours de confiance.</p></div>
+        <div class="card moment"><strong>M3-M5</strong><h3>Lancer</h3><p class="small muted">5 bassins pilotes, onboarding employeurs, campagne locale, premiers ambassadeurs.</p></div>
+        <div class="card moment"><strong>M6-M9</strong><h3>Densifier</h3><p class="small muted">Relances, axes récurrents, support, ajustements produit, reporting T2/T3.</p></div>
+        <div class="card moment"><strong>M10-M12</strong><h3>Décider</h3><p class="small muted">Bilan d'impact, coûts par trajet validé, recommandations d'extension.</p></div>
+      </div>
+    </section>
+
+    <section class="slide split dark" data-title="Association">
+      <div class="stage">
+        <p class="kicker">Portage local</p>
+        <h2>L'association COVOIT.NC donne un cadre non lucratif, local et contrôlable.</h2>
+        <p class="lead">La demande n'est pas de financer une startup spéculative. Elle finance un commun numérique de mobilité, porté localement, avec des indicateurs publics et des dépenses affectées.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Objet d'intérêt général</h3><p class="small muted">Concevoir, maintenir, promouvoir et exploiter des services numériques au service des mobilités partagées.</p></div>
+        <div class="card"><h3>Cadre financier clair</h3><p class="small muted">Subventions, dons, cotisations et partenariats réinvestis dans l'objet associatif.</p></div>
+        <div class="card"><h3>Décision publique outillée</h3><p class="small muted">Deux rapports trimestriels, exports agrégés, recommandations de généralisation.</p></div>
+      </div>
+      <p class="source">Reprise V1 : statuts COVOIT.NC et note de présentation du projet associatif.</p>
+    </section>
+
+    <section class="slide split light-green" data-title="Reporting ACE">
+      <div class="stage">
+        <p class="kicker">Contreparties ACE</p>
+        <h2>L'ACE finance un dispositif pilotable, pas une promesse.</h2>
+        <p class="lead">Deux fois pendant le pilote, COVOIT.NC peut fournir une lecture simple : usage réel, axes actifs, économies estimées, points de friction, décisions à prendre.</p>
+      </div>
+      <div class="panel">
+        <div class="bars">
+          <div class="bar"><span>Inscrits</span><div class="bar-track"><div class="bar-fill" style="width:100%"></div></div><strong>cohorte</strong></div>
+          <div class="bar"><span>Trajets validés</span><div class="bar-track"><div class="bar-fill" style="width:75%"></div></div><strong>preuve</strong></div>
+          <div class="bar"><span>Km partagés</span><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div><strong>impact</strong></div>
+          <div class="bar"><span>Coût / trajet</span><div class="bar-track"><div class="bar-fill" style="width:48%;background:var(--yellow)"></div></div><strong>pilotage</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide split dark" data-title="Demande">
+      <div class="stage">
+        <p class="kicker">Décision demandée</p>
+        <h2>Soutenir COVOIT.NC à hauteur de 4,75 M F CFP sur 12 mois.</h2>
+        <p class="lead">Objectif : faire basculer la bêta vers un service de covoiturage local, utile, suivi et activable par les partenaires publics.</p>
+      </div>
+      <div class="grid">
+        <div class="card"><h3>Ce que la subvention achète</h3><p class="small muted">Développement produit, hébergement, sécurité, animation terrain, support, reporting.</p></div>
+        <div class="card"><h3>Ce que l'ACE obtient</h3><p class="small muted">Un pilote mesurable, des données territoriales, deux rapports trimestriels, une décision d'extension objectivée.</p></div>
+        <div class="card"><h3>Ce que le territoire gagne</h3><p class="small muted">Moins de trajets seuls, plus d'entraide, un coût mobilité mieux partagé.</p></div>
+      </div>
+    </section>
+
+    <section class="slide center dark" data-title="Clôture">
+      <div class="stage narrow">
+        <p class="kicker">Conclusion</p>
+        <h2>Le bon financement n'achète pas seulement une application. Il achète le passage à l'usage.</h2>
+        <p class="lead">Cette présentation V2 défend une demande plus crédible : simple, mesurable, territoriale, et dimensionnée pour prouver l'impact en un an.</p>
+      </div>
+      <p class="source">V2 limitée à moins de 20 slides. Sources principales : ISEE NC, Ministère Transition écologique, Observatoire national du covoiturage, BlaBlaCar Newsroom, GoodFirms.</p>
+    </section>
+  </main>
+
+  <div class="nav" aria-label="Navigation de la présentation">
+    <button type="button" id="prev" aria-label="Diapositive précédente">‹</button>
+    <span class="counter" id="counter">1 / 19</span>
+    <button type="button" id="next" aria-label="Diapositive suivante">›</button>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.querySelector("#counter");
+    const progress = document.querySelector("#progress");
+    const requestedSlide = Number(new URLSearchParams(location.search).get("slide"));
+    let index = Number.isFinite(requestedSlide) ? requestedSlide - 1 : 0;
+
+    function showSlide(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `${slides[index].dataset.title || "COVOIT.NC x ACE"} - COVOIT.NC x ACE`;
+    }
+
+    document.querySelector("#prev").addEventListener("click", () => showSlide(index - 1));
+    document.querySelector("#next").addEventListener("click", () => showSlide(index + 1));
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + 1);
+      }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index - 1);
+      }
+      if (event.key === "Home") showSlide(0);
+      if (event.key === "End") showSlide(slides.length - 1);
+    });
+
+    showSlide(index);
+  </script>
+</body>
+</html>
