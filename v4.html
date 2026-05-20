@@ -1,0 +1,428 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>COVOIT.NC x Collectivités - V4</title>
+  <style>
+    :root {
+      --ink: #10231d;
+      --muted: #5f716b;
+      --paper: #f7f4ed;
+      --white: #fffdf8;
+      --line: #ded8ca;
+      --green: #15935f;
+      --deep: #082c25;
+      --blue: #17718d;
+      --yellow: #efb646;
+      --red: #d95f4c;
+      --leaf: #dfeee4;
+      --sky: #e4f1f3;
+      --shadow: 0 24px 70px rgba(16, 35, 29, 0.14);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 100%; height: 100%; background: var(--deep); color: var(--ink); }
+    body { overflow: hidden; }
+    button { font: inherit; }
+    .deck { position: relative; width: 100vw; height: 100vh; overflow: hidden; background: var(--deep); }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: clamp(28px, 4.4vw, 62px);
+      overflow: hidden;
+      background: var(--paper);
+    }
+    .slide.active { display: grid; }
+    .slide.dark {
+      color: var(--white);
+      background:
+        radial-gradient(circle at 82% 18%, rgba(239, 182, 70, 0.16), transparent 34%),
+        linear-gradient(135deg, #082c25 0%, #0d4638 60%, #123d34 100%);
+    }
+    .slide.green { background: linear-gradient(135deg, #fbf7eb 0%, #e5f1e7 100%); }
+    .slide.blue { background: linear-gradient(135deg, #f8f5ee 0%, #e6f1f3 100%); }
+    .slide.center { place-items: center; text-align: center; }
+    .slide.stack { grid-template-rows: auto minmax(0, 1fr); gap: clamp(20px, 3vw, 34px); }
+    .slide.split { grid-template-columns: minmax(0, 1fr) minmax(360px, 0.96fr); gap: clamp(28px, 4vw, 58px); align-items: center; }
+    .stage { position: relative; z-index: 1; width: 100%; max-width: 1220px; margin: 0 auto; }
+    .full { max-width: 1320px; }
+    .narrow { max-width: 980px; }
+
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: clamp(11px, 1.08vw, 14px);
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+    .kicker::before { content: ""; width: 26px; height: 3px; background: currentColor; border-radius: 99px; }
+    .dark .kicker { color: #91e5b5; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { line-height: 1.02; letter-spacing: 0; }
+    h1 { max-width: 920px; font-size: clamp(54px, 7.7vw, 106px); font-weight: 930; }
+    h2 { max-width: 1100px; font-size: clamp(36px, 5.05vw, 70px); font-weight: 920; }
+    h3 { font-size: clamp(22px, 2.2vw, 31px); font-weight: 860; }
+    p { font-size: clamp(16px, 1.48vw, 21px); line-height: 1.38; }
+    .lead { margin-top: 22px; max-width: 900px; color: var(--muted); font-size: clamp(22px, 2.35vw, 33px); line-height: 1.22; }
+    .dark .lead, .dark .muted { color: rgba(255, 253, 248, 0.75); }
+    .muted { color: var(--muted); }
+    .small { font-size: clamp(13px, 1.14vw, 16px); line-height: 1.42; }
+    .tiny { font-size: clamp(10px, 0.9vw, 12px); line-height: 1.35; }
+    body.pro .lead,
+    body.pro .source,
+    body.pro .metric span,
+    body.pro .card p,
+    body.pro .panel > p,
+    body.pro .moment p,
+    body.pro .float-stat span {
+      display: none;
+    }
+    body.pro .card,
+    body.pro .panel {
+      display: grid;
+      align-content: center;
+    }
+    body.pro .metric {
+      display: grid;
+      place-items: center;
+      text-align: center;
+    }
+
+    .grid { display: grid; gap: clamp(14px, 1.7vw, 22px); }
+    .two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .five { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .card, .panel, .metric {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255, 253, 248, 0.92);
+      box-shadow: var(--shadow);
+    }
+    .card, .panel { padding: clamp(18px, 2.2vw, 30px); }
+    .metric { display: grid; align-content: center; min-height: 174px; padding: clamp(18px, 2vw, 28px); }
+    .dark .card, .dark .panel, .dark .metric {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 22px 70px rgba(0,0,0,0.22);
+    }
+    .metric strong { display: block; color: var(--deep); font-size: clamp(40px, 5.2vw, 72px); line-height: .94; font-weight: 930; }
+    .dark .metric strong { color: var(--white); }
+    .metric span { display: block; margin-top: 10px; color: var(--muted); font-size: clamp(13px, 1.16vw, 17px); line-height: 1.34; }
+    .dark .metric span { color: rgba(255, 253, 248, 0.72); }
+
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, .78fr); align-items: center; gap: clamp(28px, 4vw, 62px); min-height: 100vh; }
+    .hero-map {
+      position: relative;
+      min-height: min(72vh, 620px);
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.07);
+      overflow: hidden;
+    }
+    .hero-map svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .float-stat {
+      position: absolute;
+      min-width: 178px;
+      padding: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.13);
+      backdrop-filter: blur(12px);
+    }
+    .float-stat strong { display: block; font-size: clamp(28px, 3.4vw, 46px); line-height: 1; }
+    .float-stat span { display: block; margin-top: 8px; color: rgba(255,253,248,.74); font-size: 13px; line-height: 1.25; }
+    .stat-a { top: 9%; left: 8%; }
+    .stat-b { right: 8%; top: 40%; }
+    .stat-c { left: 12%; bottom: 10%; }
+
+    .bars { display: grid; gap: 15px; margin-top: 22px; }
+    .bar { display: grid; grid-template-columns: 180px 1fr 92px; gap: 14px; align-items: center; color: var(--muted); font-size: 14px; }
+    .bar-track { height: 15px; border-radius: 999px; background: #ebe5d8; overflow: hidden; }
+    .bar-fill { height: 100%; border-radius: 999px; background: linear-gradient(90deg, var(--green), var(--blue)); }
+    .bar strong { color: var(--ink); font-size: 16px; }
+
+    .map-card { position: relative; min-height: 430px; overflow: hidden; background: linear-gradient(135deg, #eef6ed, #e4f1f3); }
+    .map-card svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .tag { position: absolute; border-radius: 999px; padding: 8px 12px; background: var(--white); border: 1px solid var(--line); color: var(--deep); font-size: 13px; font-weight: 830; box-shadow: 0 10px 26px rgba(16,35,29,.12); white-space: nowrap; }
+    .tag.noumea { left: 56%; top: 64%; }
+    .tag.dumbea { left: 45%; top: 50%; }
+    .tag.paita { left: 30%; top: 42%; }
+    .tag.montdore { left: 58%; top: 76%; }
+
+    .donut-wrap { display: grid; grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+    .donut {
+      width: min(100%, 400px);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--green) 0 151deg, var(--blue) 151deg 245deg, var(--yellow) 245deg 318deg, var(--red) 318deg 360deg);
+      display: grid;
+      place-items: center;
+      box-shadow: var(--shadow);
+    }
+    .donut.eco { background: conic-gradient(var(--green) 0 288deg, var(--blue) 288deg 360deg); }
+    .donut-inner { display: grid; place-items: center; width: 64%; aspect-ratio: 1; border-radius: 50%; background: var(--paper); text-align: center; padding: 20px; }
+    .donut-inner strong { display: block; color: var(--deep); font-size: clamp(40px, 5vw, 68px); line-height: .92; }
+    .dark .donut-inner .muted { color: var(--muted); }
+    .budget-line { display: grid; grid-template-columns: 14px 1fr auto; gap: 13px; align-items: center; padding: 15px 0; border-bottom: 1px solid var(--line); }
+    .budget-line:last-child { border-bottom: 0; }
+    .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--green); }
+    .dot.blue { background: var(--blue); }
+    .dot.yellow { background: var(--yellow); }
+    .dot.red { background: var(--red); }
+
+    .timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; margin-top: 12px; }
+    .timeline::before { content: ""; position: absolute; top: 42px; left: 7%; right: 7%; height: 3px; background: linear-gradient(90deg, var(--blue), var(--green), var(--yellow)); }
+    .moment { position: relative; padding-top: 82px; min-height: 310px; }
+    .moment::before { content: ""; position: absolute; top: 29px; left: 24px; width: 28px; height: 28px; border-radius: 50%; background: var(--green); border: 7px solid var(--paper); box-shadow: 0 12px 30px rgba(16,35,29,.16); }
+    .moment strong { display: block; color: var(--deep); font-size: clamp(30px, 4vw, 54px); line-height: .95; }
+
+    .source { position: absolute; left: clamp(28px, 4.4vw, 62px); right: clamp(120px, 12vw, 180px); bottom: 17px; z-index: 3; color: rgba(16,35,29,.47); font-size: 11px; line-height: 1.32; }
+    .dark .source { color: rgba(255,253,248,.46); }
+    .nav { position: fixed; right: 22px; bottom: 18px; z-index: 10; display: flex; align-items: center; gap: 8px; padding: 7px; border: 1px solid rgba(255,255,255,.18); border-radius: 999px; background: rgba(8,44,37,.74); color: white; box-shadow: 0 12px 42px rgba(0,0,0,.24); backdrop-filter: blur(12px); }
+    .nav button { display: grid; place-items: center; width: 34px; height: 34px; border: 0; border-radius: 50%; background: rgba(255,255,255,.14); color: white; cursor: pointer; }
+    .counter { min-width: 58px; text-align: center; font-size: 13px; font-weight: 780; }
+    .progress { position: fixed; left: 0; right: 0; bottom: 0; z-index: 11; height: 4px; background: rgba(255,255,255,.13); }
+    .progress span { display: block; height: 100%; width: 0%; background: linear-gradient(90deg, var(--green), var(--blue), var(--yellow)); transition: width 180ms ease; }
+
+    @media (max-width: 880px) {
+      body { overflow: auto; }
+      .deck { height: auto; min-height: 100vh; overflow: visible; }
+      .slide { position: relative; min-height: 100vh; display: none; padding-bottom: 82px; }
+      .slide.active { display: grid; }
+      .slide.split, .hero, .donut-wrap { grid-template-columns: 1fr; }
+      .three, .four, .five, .timeline { grid-template-columns: 1fr; }
+      .bar { grid-template-columns: 118px 1fr 72px; }
+      .timeline::before { display: none; }
+      .source { right: 28px; }
+    }
+  </style>
+</head>
+<body class="pro">
+  <main class="deck" aria-label="Présentation COVOIT.NC V4">
+    <section class="slide dark active" data-title="Ouverture">
+      <div class="stage hero">
+        <div>
+          <p class="kicker">COVOIT.NC</p>
+          <h1>Une mobilité calédonienne, verte et solidaire.</h1>
+          <p class="lead">Un service simple pour partager les trajets du quotidien : communes, campus, événements, entreprises et associations.</p>
+        </div>
+        <div class="hero-map" aria-label="Carte stylisée de la Nouvelle-Calédonie">
+          <svg viewBox="0 0 620 640" role="img">
+            <path d="M105 84 C202 122 279 198 356 286 C434 375 506 443 568 529 C590 561 577 604 536 617 C423 650 288 559 194 462 C97 361 38 220 63 126 C70 101 84 89 105 84 Z" fill="rgba(145,229,181,.22)" stroke="rgba(255,255,255,.18)" stroke-width="2"/>
+            <path d="M121 143 C223 194 292 270 360 338 C430 407 485 466 546 553" fill="none" stroke="#f7f4ed" stroke-width="16" stroke-linecap="round" opacity=".54"/>
+            <path d="M121 143 C223 194 292 270 360 338 C430 407 485 466 546 553" fill="none" stroke="#91e5b5" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"/>
+            <path d="M167 457 C254 423 339 432 414 486" fill="none" stroke="#efb646" stroke-width="6" stroke-linecap="round"/>
+            <path d="M216 212 C254 293 275 370 303 469" fill="none" stroke="#6bb9d2" stroke-width="6" stroke-linecap="round"/>
+            <g fill="#fffdf8" stroke="#082c25" stroke-width="5">
+              <circle cx="121" cy="143" r="13"/><circle cx="216" cy="212" r="13"/><circle cx="303" cy="469" r="13"/><circle cx="414" cy="486" r="13"/><circle cx="546" cy="553" r="13"/>
+            </g>
+          </svg>
+          <div class="float-stat stat-a"><strong>80%</strong><span>des actifs privilégient la voiture.</span></div>
+          <div class="float-stat stat-b"><strong>174k</strong><span>habitants dans le Grand Nouméa.</span></div>
+          <div class="float-stat stat-c"><strong>10</strong><span>slides, axe Calédonie.</span></div>
+        </div>
+      </div>
+      <p class="source">Sources : ISEE Nouvelle-Calédonie, INSEE populations de référence 2025, Province Sud, Cour des comptes, CCI-NC.</p>
+    </section>
+
+    <section class="slide split green" data-title="Grand Nouméa">
+      <div class="stage">
+        <p class="kicker">Grand Nouméa</p>
+        <h2>Les trajets réguliers sont concentrés autour de quatre communes.</h2>
+        <p class="lead">Nouméa, Dumbéa, Païta et le Mont-Dore forment le premier terrain naturel : assez dense pour matcher, assez proche pour animer.</p>
+      </div>
+      <div class="panel map-card">
+        <svg viewBox="0 0 760 560" role="img" aria-label="Axes du Grand Nouméa">
+          <path d="M125 88 C214 113 292 178 365 254 C440 334 520 393 633 478 C657 497 653 530 621 543 C536 576 420 524 333 457 C230 378 145 294 101 196 C75 139 88 96 125 88 Z" fill="#15935f" opacity=".20"/>
+          <path d="M150 140 C244 181 304 249 365 306 C443 377 512 429 615 501" fill="none" stroke="#fffdf8" stroke-width="16" stroke-linecap="round"/>
+          <path d="M150 140 C244 181 304 249 365 306 C443 377 512 429 615 501" fill="none" stroke="#15935f" stroke-width="5" stroke-linecap="round" stroke-dasharray="10 12"/>
+          <path d="M178 410 C257 377 334 374 404 402 C470 427 508 465 560 520" fill="none" stroke="#efb646" stroke-width="6" stroke-linecap="round"/>
+          <g fill="#fffdf8" stroke="#082c25" stroke-width="5">
+            <circle cx="404" cy="402" r="13"/><circle cx="615" cy="501" r="13"/><circle cx="226" cy="206" r="13"/><circle cx="319" cy="403" r="13"/>
+          </g>
+        </svg>
+        <span class="tag paita">Païta 27,6k</span>
+        <span class="tag dumbea">Dumbéa 34,9k</span>
+        <span class="tag noumea">Nouméa 86,0k</span>
+        <span class="tag montdore">Mont-Dore 25,3k</span>
+      </div>
+      <p class="source">INSEE, populations de référence des communes de Nouvelle-Calédonie en 2025 : Nouméa 85 976, Dumbéa 34 926, Païta 27 609, Mont-Dore 25 303 habitants, soit environ 173 814 habitants.</p>
+    </section>
+
+    <section class="slide stack blue" data-title="Axes du projet">
+      <div class="stage full">
+        <p class="kicker">Axes du projet</p>
+        <h2>Un service local au croisement de cinq priorités publiques.</h2>
+      </div>
+      <div class="stage full grid five">
+        <div class="card"><h3>Écologie</h3><p class="small muted">Réduire l'empreinte des trajets déjà effectués en voiture.</p></div>
+        <div class="card"><h3>Sécurité</h3><p class="small muted">Organiser les trajets plutôt que dépendre du stop improvisé.</p></div>
+        <div class="card"><h3>Coût de la vie</h3><p class="small muted">Partager les frais sur les déplacements réguliers.</p></div>
+        <div class="card"><h3>Lien social</h3><p class="small muted">Relier voisins, collègues, étudiants et associations.</p></div>
+        <div class="card"><h3>Collectivités</h3><p class="small muted">Outiller mairies, campus, événements et partenaires locaux.</p></div>
+      </div>
+    </section>
+
+    <section class="slide stack" data-title="Activation">
+      <div class="stage full">
+        <p class="kicker">Activation territoriale</p>
+        <h2>Faire démarrer l'usage là où la confiance existe déjà.</h2>
+      </div>
+      <div class="stage full grid five">
+        <div class="card"><h3>Mairies</h3><p class="small muted">Relais de proximité, info quartiers, événements communaux.</p></div>
+        <div class="card"><h3>Université</h3><p class="small muted">Étudiants, horaires réguliers, budget transport sensible.</p></div>
+        <div class="card"><h3>Événements</h3><p class="small muted">Trajets ponctuels, pics de demande, stationnement limité.</p></div>
+        <div class="card"><h3>Employeurs</h3><p class="small muted">Parkings, horaires partagés, équipes déjà identifiées.</p></div>
+        <div class="card"><h3>Associations</h3><p class="small muted">Confiance sociale, bénévoles, groupes locaux.</p></div>
+      </div>
+    </section>
+
+    <section class="slide split green" data-title="Coût de la vie">
+      <div class="stage">
+        <p class="kicker">Coût de la vie</p>
+        <h2>Partager un trajet, c'est alléger une dépense du quotidien.</h2>
+        <p class="lead">Dans un territoire où les distances pèsent vite sur les ménages, le covoiturage transforme une voiture déjà utilisée en économie concrète.</p>
+      </div>
+      <div class="panel">
+        <h3>Exemple local : 24 km</h3>
+        <div class="bars">
+          <div class="bar"><span>Coût estimé</span><div class="bar-track"><div class="bar-fill" style="width:82%"></div></div><strong>821 F</strong></div>
+          <div class="bar"><span>Prix conseillé</span><div class="bar-track"><div class="bar-fill" style="width:34%"></div></div><strong>200 F</strong></div>
+          <div class="bar"><span>Commission</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><strong>0 F</strong></div>
+        </div>
+      </div>
+      <p class="source">Exemple repris du calcul V1 : distance 24,1 km, coût total estimé 821 F CFP, prix conseillé 200 F CFP par place, sans commission commerciale.</p>
+    </section>
+
+    <section class="slide split blue" data-title="Sécurité">
+      <div class="stage">
+        <p class="kicker">Sécurité</p>
+        <h2>Une alternative plus rassurante que le stop.</h2>
+        <p class="lead">Le stop repose sur l'improvisation. Le covoiturage organisé ajoute identité, réservation, historique et signalement.</p>
+      </div>
+      <div class="grid two">
+        <div class="card"><h3>Profils</h3><p class="small muted">Téléphone, avis, favoris, blocage et signalement.</p></div>
+        <div class="card"><h3>Réservation</h3><p class="small muted">Trajet, horaire, lieu de rendez-vous et passagers connus.</p></div>
+        <div class="card"><h3>Prix clair</h3><p class="small muted">Partage des frais, pas de rémunération cachée.</p></div>
+        <div class="card"><h3>Historique</h3><p class="small muted">Trajets suivis, retours utilisateurs, incidents documentés.</p></div>
+      </div>
+    </section>
+
+    <section class="slide split dark" data-title="Écologie">
+      <div class="stage">
+        <p class="kicker">Écologie</p>
+        <h2>Réduire l'empreinte des trajets déjà faits en voiture.</h2>
+        <div class="panel" style="margin-top: 30px;">
+          <h3>Covoiturer, c'est agir sur le premier mode de déplacement des actifs.</h3>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="donut eco" aria-label="Répartition des modes de déplacement des actifs">
+          <div class="donut-inner"><strong>80%</strong><span class="small muted">voiture</span></div>
+        </div>
+        <div class="budget-line"><span class="dot"></span><div><h3>Voiture</h3></div><strong>80%</strong></div>
+        <div class="budget-line"><span class="dot blue"></span><div><h3>Autres modes</h3></div><strong>20%</strong></div>
+      </div>
+      <p class="source">ISEE, Synthèse n°63, recensement 2019 : 80 % des actifs privilégient la voiture pour se rendre au travail. Le solde est présenté ici comme “autres modes”.</p>
+    </section>
+
+    <section class="slide split green" data-title="Lien social">
+      <div class="stage">
+        <p class="kicker">Lien social</p>
+        <h2>Le covoiturage crée des liens utiles entre voisins, collègues et étudiants.</h2>
+        <p class="lead">Dans une île où les réseaux locaux comptent, les premiers usages doivent être accompagnés par des relais humains.</p>
+      </div>
+      <div class="panel">
+        <div class="bars">
+          <div class="bar"><span>Voisins</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><strong>quartiers</strong></div>
+          <div class="bar"><span>Collègues</span><div class="bar-track"><div class="bar-fill" style="width:86%"></div></div><strong>emploi</strong></div>
+          <div class="bar"><span>Étudiants</span><div class="bar-track"><div class="bar-fill" style="width:64%"></div></div><strong>campus</strong></div>
+          <div class="bar"><span>Événements</span><div class="bar-track"><div class="bar-fill" style="width:58%"></div></div><strong>sorties</strong></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide stack blue" data-title="Plan">
+      <div class="stage full">
+        <p class="kicker">Plan 12 mois</p>
+        <h2>Un planning court, lisible, piloté avec les collectivités.</h2>
+      </div>
+      <div class="stage full timeline">
+        <div class="card moment"><strong>M0-M2</strong><h3>Préparer</h3><p class="small muted">Kit mairies, campus, événements, règles de prix et sécurité.</p></div>
+        <div class="card moment"><strong>M3-M5</strong><h3>Lancer</h3><p class="small muted">Premiers bassins : communes, université, employeurs volontaires.</p></div>
+        <div class="card moment"><strong>M6-M9</strong><h3>Densifier</h3><p class="small muted">Relais terrain, événements, lignes récurrentes, support.</p></div>
+        <div class="card moment"><strong>M10-M12</strong><h3>Mesurer</h3><p class="small muted">Deux rapports, indicateurs, recommandations d'extension.</p></div>
+      </div>
+    </section>
+
+    <section class="slide stack dark" data-title="Demande">
+      <div class="stage full">
+        <p class="kicker">Demande</p>
+        <h2>Soutenir un pilote calédonien à hauteur de 2,175 M F CFP.</h2>
+      </div>
+      <div class="stage full donut-wrap">
+        <div class="donut" aria-label="Budget demandé">
+          <div class="donut-inner"><strong>2,175M</strong><span class="small muted">F CFP sur 12 mois</span></div>
+        </div>
+        <div class="panel">
+          <div class="budget-line"><span class="dot"></span><div><h3>Outils et développements</h3><p class="small muted">Développements, abonnements, matériels, logiciels, licences.</p></div><strong>910 000 F</strong></div>
+          <div class="budget-line"><span class="dot blue"></span><div><h3>Exploitation technique</h3><p class="small muted">Hébergement, sauvegardes, monitoring, messagerie.</p></div><strong>570 000 F</strong></div>
+          <div class="budget-line"><span class="dot yellow"></span><div><h3>Support et sécurité</h3><p class="small muted">Aide utilisateurs, modération, incidents, confiance.</p></div><strong>290 000 F</strong></div>
+          <div class="budget-line"><span class="dot red"></span><div><h3>Animation locale</h3><p class="small muted">Mairies, campus, événements, relais terrain.</p></div><strong>235 000 F</strong></div>
+          <div class="budget-line"><span class="dot"></span><div><h3>Administration</h3><p class="small muted">Assurances, comptabilité, obligations associatives.</p></div><strong>170 000 F</strong></div>
+        </div>
+      </div>
+      <p class="source">Budget V4 : total 2,175 M F CFP. Objectif : pilote local, mesurable et activé par les partenaires territoriaux.</p>
+    </section>
+  </main>
+
+  <div class="nav" aria-label="Navigation de la présentation">
+    <button type="button" id="prev" aria-label="Diapositive précédente">‹</button>
+    <span class="counter" id="counter">1 / 10</span>
+    <button type="button" id="next" aria-label="Diapositive suivante">›</button>
+  </div>
+  <div class="progress" aria-hidden="true"><span id="progress"></span></div>
+
+  <script>
+    const slides = Array.from(document.querySelectorAll(".slide"));
+    const counter = document.querySelector("#counter");
+    const progress = document.querySelector("#progress");
+    const requestedSlide = Number(new URLSearchParams(location.search).get("slide"));
+    let index = Number.isFinite(requestedSlide) ? requestedSlide - 1 : 0;
+
+    function showSlide(nextIndex) {
+      index = Math.max(0, Math.min(slides.length - 1, nextIndex));
+      slides.forEach((slide, i) => slide.classList.toggle("active", i === index));
+      counter.textContent = `${index + 1} / ${slides.length}`;
+      progress.style.width = `${((index + 1) / slides.length) * 100}%`;
+      document.title = `${slides[index].dataset.title || "COVOIT.NC V4"} - COVOIT.NC V4`;
+    }
+
+    document.querySelector("#prev").addEventListener("click", () => showSlide(index - 1));
+    document.querySelector("#next").addEventListener("click", () => showSlide(index + 1));
+    document.addEventListener("keydown", (event) => {
+      if (["ArrowRight", "PageDown", " "].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index + 1);
+      }
+      if (["ArrowLeft", "PageUp"].includes(event.key)) {
+        event.preventDefault();
+        showSlide(index - 1);
+      }
+      if (event.key === "Home") showSlide(0);
+      if (event.key === "End") showSlide(slides.length - 1);
+    });
+
+    showSlide(index);
+  </script>
+</body>
+</html>
